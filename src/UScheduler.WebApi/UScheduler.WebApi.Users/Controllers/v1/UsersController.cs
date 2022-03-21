@@ -42,7 +42,7 @@ namespace UScheduler.WebApi.Users.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetUserById(Guid id)
         {
-            logger.LogDebug("Handeling GET request on api/v1/Users/{id}");
+            logger.LogDebug("Handeling GET request on api/v1/Users/{id}", id);
             
             var result = await provider.GetUserByIdAsync(id);
 
@@ -66,7 +66,7 @@ namespace UScheduler.WebApi.Users.Controllers
 
             if (result.IsSuccess)
             {
-                return Created(Request.Host.Value + $"/api/v1/Users/{result.User.Id}", result.User);
+                return Created(Request.Host.Value + $"/api/v1/Users/{result.User?.Id}", result.User);
             }
 
             if (result.ErrorMessage == ErrorMessage.EmailIsAlreadyUsed || result.ErrorMessage == ErrorMessage.UserNameIsAlreadyUsed)
@@ -84,7 +84,7 @@ namespace UScheduler.WebApi.Users.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         public async Task<IActionResult> UpdateUser(Guid id, [FromBody] UpdateUserModel user)
         {
-            logger.LogDebug("Handeling PUT request on api/v1/Users/{id}");
+            logger.LogDebug("Handeling PUT request on api/v1/Users/{id}", id);
             var result = await provider.FullyUpdateUserAsync(id, user);
 
             if (result.IsSuccess)
@@ -112,7 +112,7 @@ namespace UScheduler.WebApi.Users.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         public async Task<IActionResult> UpdateUser(Guid id, [FromBody] JsonPatchDocument<UpdateUserModel> patchDoc)
         {
-            logger.LogDebug("Handeling PATCH request on api/v1/Users/{id}");
+            logger.LogDebug("Handeling PATCH request on api/v1/Users/{id}", id);
             if (patchDoc != null)
             {
                 var user = new UpdateUserModel();
@@ -146,7 +146,7 @@ namespace UScheduler.WebApi.Users.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteUser(Guid id)
         {
-            logger.LogDebug("Handeling DELETE request on api/v1/Users/{id}");
+            logger.LogDebug("Handeling DELETE request on api/v1/Users/{id}", id);
 
             var result = await provider.DeleteUserByIdAsync(id);
 

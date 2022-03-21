@@ -48,17 +48,6 @@ namespace UScheduler.WebApi.Users.Data
                     .HasForeignKey<User>(user => user.AccountSettingsId)
                     .OnDelete(DeleteBehavior.Cascade);
             });
-
-            modelBuilder.Entity<AccountSettings>(builder =>
-            {
-                //builder.HasOne<User>();
-                //builder.Property(settings => settings.EmailForNotification)
-                //    .IsRequired();
-
-                //builder.Property(settings => settings.SendNotificationOnEmail)
-                //    .HasDefaultValue(false)
-                //    .IsRequired();
-            });
         }
     }
 }

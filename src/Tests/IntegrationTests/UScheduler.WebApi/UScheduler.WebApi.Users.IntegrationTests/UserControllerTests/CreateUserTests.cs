@@ -39,8 +39,8 @@ namespace UScheduler.WebApi.Users.IntegrationTests.UserControllerTests
             createdUser?.UserName.Should().Be(user.UserName);
             createdUser?.Email.Should().Be(user.Email);
             createdUser?.AccountSettings.Should().NotBeNull();
-            createdUser?.AccountSettings.EmailForNotification.Should().Be(user.Email);
-            createdUser?.AccountSettings.SendNotificationOnEmail.Should().Be(false);
+            createdUser?.AccountSettings?.EmailForNotification.Should().Be(user.Email);
+            createdUser?.AccountSettings?.SendNotificationOnEmail.Should().Be(false);
         }
 
         [Test]

@@ -156,7 +156,7 @@ namespace UScheduler.WebApi.Users.Services
             }
             catch (Exception ex)
             {
-                logger?.LogError(ex.ToString());
+                logger?.LogError(ex, "Error while fully updating user");
                 return (false, null, ex.Message);
             }
         }
@@ -221,14 +221,14 @@ namespace UScheduler.WebApi.Users.Services
                     user.AccountSettings.SendNotificationOnEmail = updateUserModel.AccountSettings.SendNotificationOnEmail;
                 }
 
-                var response = context.Users.Update(user);
+                context.Users.Update(user);
                 await context.SaveChangesAsync();
                 var result = mapper.Map<User, DisplayUserModel>(user);
                 return (true, result, string.Empty);
             }
             catch (Exception ex)
             {
-                logger?.LogError(ex.ToString());
+                logger?.LogError(ex, "Error while partially updating user");
                 return (false, null, ex.Message);
             }
         }
@@ -249,7 +249,7 @@ namespace UScheduler.WebApi.Users.Services
             }
             catch (Exception ex)
             {
-                logger?.LogError(ex.ToString());
+                logger?.LogError(ex, "Error while deleting user");
                 return (false, ex.Message);
             }
         }
