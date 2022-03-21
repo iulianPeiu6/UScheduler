@@ -26,10 +26,10 @@ namespace UScheduler.WebApi.Users.IntegrationTests.UserControllerTests
             // Asert
             response.StatusCode.Should().Be(HttpStatusCode.OK);
             user.Should().NotBeNull();
-            user.Id.Should().NotBeEmpty();
-            user.UserName.Should().NotBeNullOrEmpty();
-            user.Email.Should().NotBeNullOrEmpty();
-            user.RegistrationDate.Should().NotBeSameDateAs(DateTime.MinValue);
+            user?.Id.Should().NotBeEmpty();
+            user?.UserName.Should().NotBeNullOrEmpty();
+            user?.Email.Should().NotBeNullOrEmpty();
+            user?.RegistrationDate.Should().NotBeSameDateAs(DateTime.MinValue);
         }
 
         [Test]

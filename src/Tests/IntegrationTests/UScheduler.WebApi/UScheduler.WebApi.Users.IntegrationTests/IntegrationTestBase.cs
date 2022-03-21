@@ -12,7 +12,7 @@ namespace UScheduler.WebApi.Users.IntegrationTests
 {
     public class IntegrationTestBase
     {
-        private static IntegrationTestBase instance = null;
+        private static IntegrationTestBase instance = new IntegrationTestBase();
         protected readonly HttpClient testClient;
         protected readonly Guid invalidUserId = Guid.Parse("79cf1055-efa8-4dab-80ef-c9a59d4adcb1");
 
@@ -34,9 +34,13 @@ namespace UScheduler.WebApi.Users.IntegrationTests
                 });
 
                 var scopeFactory = appFactory.Server.Services.GetService<IServiceScopeFactory>();
-                using (var scope = scopeFactory.CreateScope())
+                using (var scope = scopeFactory?.CreateScope())
                 {
-                    var context = scope.ServiceProvider.GetRequiredService<UsersContext>();
+                    var context = scope?.ServiceProvider?.GetRequiredService<UsersContext>();
+                    if (context == null)
+                    {
+                        throw new ArgumentNullException(nameof(context));
+                    }
                     SeedRecordsInDatabase(context);
                 }
                 testClient = appFactory.CreateClient();
@@ -48,8 +52,13 @@ namespace UScheduler.WebApi.Users.IntegrationTests
             }
         }
 
-        private void SeedRecordsInDatabase(UsersContext context)
+        private static void SeedRecordsInDatabase(UsersContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
             context.Database.EnsureCreated();
 
             context.Add(new User

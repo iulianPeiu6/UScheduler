@@ -6,6 +6,6 @@
 
         public bool SendNotificationOnEmail { get; set; }
 
-        public string EmailForNotification { get; set; }
+        public string? EmailForNotification { get; set; }
     }
 }

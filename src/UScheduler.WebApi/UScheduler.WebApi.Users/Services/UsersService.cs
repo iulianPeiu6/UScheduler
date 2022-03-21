@@ -27,7 +27,7 @@ namespace UScheduler.WebApi.Users.Services
             this.validator = validator;
         }
 
-        public async Task<(bool IsSuccess, IEnumerable<DisplayUserModel> Users, string ErrorMessage)> GetAllUsersAsync()
+        public async Task<(bool IsSuccess, IEnumerable<DisplayUserModel>? Users, string ErrorMessage)> GetAllUsersAsync()
         {
             try
             {
@@ -51,7 +51,7 @@ namespace UScheduler.WebApi.Users.Services
 
                 logger?.LogInformation($"{users.Count} user(s) found in database");
                 var result = mapper.Map<IEnumerable<User>, IEnumerable<DisplayUserModel>>(users);
-                return (true, result, null);
+                return (true, result, string.Empty);
             }
             catch (Exception ex)
             {
@@ -60,7 +60,7 @@ namespace UScheduler.WebApi.Users.Services
             }
         }
 
-        public async Task<(bool IsSuccess, DisplayUserModel User, string ErrorMessage)> GetUserByIdAsync(Guid id)
+        public async Task<(bool IsSuccess, DisplayUserModel? User, string ErrorMessage)> GetUserByIdAsync(Guid id)
         {
             try
             {
@@ -88,7 +88,7 @@ namespace UScheduler.WebApi.Users.Services
                 }
                 logger?.LogInformation($"User with id '{id}'found in database");
                 var result = mapper.Map<User, DisplayUserModel>(user);
-                return (true, result, null);
+                return (true, result, string.Empty);
             }
             catch (Exception ex)
             {
@@ -97,7 +97,7 @@ namespace UScheduler.WebApi.Users.Services
             }
         }
 
-        public async Task<(bool IsSuccess, DisplayUserModel User, string ErrorMessage)> CreateUserAsync(CreateUserModel createUserModel)
+        public async Task<(bool IsSuccess, DisplayUserModel? User, string ErrorMessage)> CreateUserAsync(CreateUserModel createUserModel)
         {
             try
             {
@@ -123,7 +123,7 @@ namespace UScheduler.WebApi.Users.Services
                 var createdUser = response.Entity;
                 var result = mapper.Map<User, DisplayUserModel>(createdUser);
 
-                return (true, result, null);
+                return (true, result, string.Empty);
             }
             catch (Exception ex)
             {
@@ -132,7 +132,7 @@ namespace UScheduler.WebApi.Users.Services
             }
         }
 
-        public async Task<(bool IsSuccess, DisplayUserModel User, string ErrorMessage)> FullyUpdateUserAsync(Guid id, UpdateUserModel updateUserModel)
+        public async Task<(bool IsSuccess, DisplayUserModel? User, string ErrorMessage)> FullyUpdateUserAsync(Guid id, UpdateUserModel updateUserModel)
         {
             try
             {
@@ -152,7 +152,7 @@ namespace UScheduler.WebApi.Users.Services
                 await context.SaveChangesAsync();
                 var createdUser = response.Entity;
                 var result = mapper.Map<User, DisplayUserModel>(createdUser);
-                return (true, result, null);
+                return (true, result, string.Empty);
             }
             catch (Exception ex)
             {
@@ -161,7 +161,7 @@ namespace UScheduler.WebApi.Users.Services
             }
         }
 
-        public async Task<(bool IsSuccess, DisplayUserModel User, string ErrorMessage)> PartiallyUpdateUserAsync(Guid id, UpdateUserModel updateUserModel)
+        public async Task<(bool IsSuccess, DisplayUserModel? User, string ErrorMessage)> PartiallyUpdateUserAsync(Guid id, UpdateUserModel updateUserModel)
         {
             try
             {
@@ -224,7 +224,7 @@ namespace UScheduler.WebApi.Users.Services
                 var response = context.Users.Update(user);
                 await context.SaveChangesAsync();
                 var result = mapper.Map<User, DisplayUserModel>(user);
-                return (true, result, null);
+                return (true, result, string.Empty);
             }
             catch (Exception ex)
             {
@@ -245,7 +245,7 @@ namespace UScheduler.WebApi.Users.Services
                 }
                 context.Users.Remove(user);
                 await context.SaveChangesAsync();
-                return (true, null);
+                return (true, string.Empty);
             }
             catch (Exception ex)
             {

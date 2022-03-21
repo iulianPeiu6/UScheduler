@@ -6,9 +6,9 @@ namespace UScheduler.WebApi.Users.Data
 {
     public sealed class UsersContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
+        public DbSet<User>? Users { get; set; }
 
-        public DbSet<AccountSettings> AccountSettings { get; set; }
+        public DbSet<AccountSettings>? AccountSettings { get; set; }
 
         public UsersContext(DbContextOptions options) : base(options)
         {

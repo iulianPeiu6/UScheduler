@@ -34,13 +34,13 @@ namespace UScheduler.WebApi.Users.IntegrationTests.UserControllerTests
             // Asert
             response.StatusCode.Should().Be(HttpStatusCode.Created);
             createdUser.Should().NotBeNull();
-            createdUser.Id.Should().NotBeEmpty();
-            createdUser.RegistrationDate.Should().BeCloseTo(DateTime.Now, TimeSpan.FromDays(1));
-            createdUser.UserName.Should().Be(user.UserName);
-            createdUser.Email.Should().Be(user.Email);
-            createdUser.AccountSettings.Should().NotBeNull();
-            createdUser.AccountSettings.EmailForNotification.Should().Be(user.Email);
-            createdUser.AccountSettings.SendNotificationOnEmail.Should().Be(false);
+            createdUser?.Id.Should().NotBeEmpty();
+            createdUser?.RegistrationDate.Should().BeCloseTo(DateTime.Now, TimeSpan.FromDays(1));
+            createdUser?.UserName.Should().Be(user.UserName);
+            createdUser?.Email.Should().Be(user.Email);
+            createdUser?.AccountSettings.Should().NotBeNull();
+            createdUser?.AccountSettings.EmailForNotification.Should().Be(user.Email);
+            createdUser?.AccountSettings.SendNotificationOnEmail.Should().Be(false);
         }
 
         [Test]

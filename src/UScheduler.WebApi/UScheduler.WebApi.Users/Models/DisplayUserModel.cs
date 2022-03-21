@@ -7,16 +7,13 @@ namespace UScheduler.WebApi.Users.Models
     {
         public Guid Id { get; set; }
 
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
 
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime RegistrationDate { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public AccountSettings AccountSettings { get; set; }
+        public AccountSettings? AccountSettings { get; set; }
     }
 }
