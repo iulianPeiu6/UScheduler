@@ -8,7 +8,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using UScheduler.WebApi.Users.Models;
 
-namespace UScheduler.WebApi.Users.IntegrationTests.UserControllerTests
+namespace UScheduler.WebApi.Users.IntegrationTests.UsersControllerTests
 {
     public class CreateUserTests : IntegrationTestBase
     {

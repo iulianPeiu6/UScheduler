@@ -4,7 +4,7 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace UScheduler.WebApi.Users.IntegrationTests.UserControllerTests
+namespace UScheduler.WebApi.Users.IntegrationTests.UsersControllerTests
 {
     public class DeleteUserTests : IntegrationTestBase
     {
