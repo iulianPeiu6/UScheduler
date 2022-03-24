@@ -31,4 +31,8 @@
     <PackageReference Include="Vanguard" Version="5.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\Migrations\" />
+  </ItemGroup>
+
 </Project>

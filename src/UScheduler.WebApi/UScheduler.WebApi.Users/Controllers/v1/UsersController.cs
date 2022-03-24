@@ -113,6 +113,7 @@ namespace UScheduler.WebApi.Users.Controllers
         public async Task<IActionResult> UpdateUser(Guid id, [FromBody] JsonPatchDocument<UpdateUserModel> patchDoc)
         {
             logger.LogDebug("Handeling PATCH request on api/v1/Users/{id}", id);
+
             if (patchDoc != null)
             {
                 var user = new UpdateUserModel();
@@ -137,8 +138,8 @@ namespace UScheduler.WebApi.Users.Controllers
 
                 return BadRequest(new { message = result.ErrorMessage });
             }
-            return NoContent();
-            
+
+            return BadRequest();
         }
 
         [HttpDelete("{id}")]

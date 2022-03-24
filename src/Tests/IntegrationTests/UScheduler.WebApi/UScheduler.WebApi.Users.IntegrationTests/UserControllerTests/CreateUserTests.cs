@@ -18,7 +18,7 @@ namespace UScheduler.WebApi.Users.IntegrationTests.UserControllerTests
             // Arange
             var user = new CreateUserModel
             {
-                UserName = "username",
+                UserName = "username-004",
                 Email = "email.004@email.com",
                 HashedPassword = "ABC1ABC9="
             };
@@ -61,6 +61,48 @@ namespace UScheduler.WebApi.Users.IntegrationTests.UserControllerTests
 
             // Asert
             response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+            responseContent.Should().NotBeNullOrEmpty();
+        }
+
+        [Test]
+        public async Task Given_UserWithAlreadyUsedEmail_When_CreateUserIsCalled_Then_Return409ConflictAsync()
+        {
+            // Arange
+            var user = new CreateUserModel
+            {
+                UserName = "username-004",
+                Email = "email.003@email.com",
+                HashedPassword = "ABC1ABC9="
+            };
+
+            // Act
+            var requestContent = new StringContent(JsonSerializer.Serialize(user), Encoding.UTF8, "application/json");
+            var response = await testClient.PostAsync("api/v1/Users", requestContent);
+            var responseContent = await response.Content.ReadAsStringAsync();
+
+            // Asert
+            response.StatusCode.Should().Be(HttpStatusCode.Conflict);
+            responseContent.Should().NotBeNullOrEmpty();
+        }
+
+        [Test]
+        public async Task Given_UserWithAlreadyUsedUsername_When_CreateUserIsCalled_Then_Return409ConflictAsync()
+        {
+            // Arange
+            var user = new CreateUserModel
+            {
+                UserName = "username-003",
+                Email = "email.005@email.com",
+                HashedPassword = "ABC1ABC9="
+            };
+
+            // Act
+            var requestContent = new StringContent(JsonSerializer.Serialize(user), Encoding.UTF8, "application/json");
+            var response = await testClient.PostAsync("api/v1/Users", requestContent);
+            var responseContent = await response.Content.ReadAsStringAsync();
+
+            // Asert
+            response.StatusCode.Should().Be(HttpStatusCode.Conflict);
             responseContent.Should().NotBeNullOrEmpty();
         }
 

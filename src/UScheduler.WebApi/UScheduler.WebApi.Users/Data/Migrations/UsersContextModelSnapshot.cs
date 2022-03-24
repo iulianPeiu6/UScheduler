@@ -11,7 +11,7 @@ using UScheduler.WebApi.Users.Data;
 namespace UScheduler.WebApi.Users.Data.Migrations
 {
     [DbContext(typeof(UsersContext))]
-    partial class USchedulerContextModelSnapshot : ModelSnapshot
+    partial class UsersContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

@@ -12,8 +12,8 @@ using UScheduler.WebApi.Users.Data;
 namespace UScheduler.WebApi.Users.Data.Migrations
 {
     [DbContext(typeof(UsersContext))]
-    [Migration("20220315010017_001.InitiaCreate")]
-    partial class _001InitiaCreate
+    [Migration("20220324131355_InitialCreate001")]
+    partial class InitialCreate001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

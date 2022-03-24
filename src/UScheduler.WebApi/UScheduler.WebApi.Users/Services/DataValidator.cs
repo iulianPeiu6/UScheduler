@@ -18,37 +18,9 @@ namespace UScheduler.WebApi.Users.Services
             this.context = context;
         }
 
-        public bool EmailIsvalid(string email)
-        {
-            var trimmedEmail = email.Trim();
-
-            if (trimmedEmail.EndsWith("."))
-            {
-                return false;
-            }
-
-            try
-            {
-                var mailAddress = new MailAddress(email);
-                return mailAddress.Address == trimmedEmail;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
         public async Task<(bool Success, string Error)> ValidateCreateUserModelAsync(CreateUserModel createUserModel)
         {
-            Guard.ArgumentNotNullOrEmpty(createUserModel.UserName, nameof(createUserModel.UserName), ErrorMessage.UserNameIsRequired);
-            Guard.ArgumentNotNullOrEmpty(createUserModel.Email, nameof(createUserModel.Email), ErrorMessage.EmailIsRequired);
-
-            if (!EmailIsvalid(createUserModel.Email))
-            {
-                throw new ArgumentException(ErrorMessage.EmailIsInvalid, nameof(createUserModel.Email));
-            }
-
-            Guard.ArgumentNotNullOrEmpty(createUserModel.HashedPassword, nameof(createUserModel.HashedPassword), ErrorMessage.PasswordIsRequired);
+            ValidateFormat(createUserModel);
 
             var emailIsTaken = await context.Users
                 .Where(u => u.Email == createUserModel.Email)
@@ -73,14 +45,7 @@ namespace UScheduler.WebApi.Users.Services
 
         public async Task<(bool Success, string Error)> ValidateFullUpdateUserModel(Guid id, UpdateUserModel updateUserModel)
         {
-            Guard.ArgumentNotNull(updateUserModel, nameof(updateUserModel));
-
-            if (!EmailIsvalid(updateUserModel.Email))
-            {
-                throw new ArgumentException(ErrorMessage.EmailIsInvalid, nameof(updateUserModel.Email));
-            }
-
-            Guard.ArgumentNotNullOrEmpty(updateUserModel.HashedPassword, nameof(updateUserModel.HashedPassword), ErrorMessage.PasswordIsRequired);
+            ValidateFormat(updateUserModel);
 
             var userExists = await context.Users
                 .Where(u => u.Id == id)
@@ -114,16 +79,8 @@ namespace UScheduler.WebApi.Users.Services
 
         public async Task<(bool Success, string Error)> ValidatePartialUpdateUserModel(Guid id, UpdateUserModel updateUserModel)
         {
-            if (updateUserModel.UserName == string.Empty)
-            {
-                throw new ArgumentException(ErrorMessage.UserNameIsRequired, nameof(updateUserModel.UserName));
-            }
-
-            if (updateUserModel.Email != null && !EmailIsvalid(updateUserModel.Email))
-            {
-                throw new ArgumentException(ErrorMessage.EmailIsInvalid, nameof(updateUserModel.Email));
-            }
-
+            ValidateFormatIfNeeded(updateUserModel);
+            
             if (updateUserModel.Email != null)
             {
                 var emailIsTaken = await context.Users
@@ -161,6 +118,59 @@ namespace UScheduler.WebApi.Users.Services
             }
 
             return (true, null);
+        }
+
+        private void ValidateFormat(CreateUserModel createUserModel)
+        {
+            Guard.ArgumentNotNullOrEmpty(createUserModel.UserName, nameof(createUserModel.UserName), ErrorMessage.UserNameIsRequired);
+            Guard.ArgumentNotNullOrEmpty(createUserModel.Email, nameof(createUserModel.Email), ErrorMessage.EmailIsRequired);
+
+            if (!EmailIsValid(createUserModel.Email))
+            {
+                throw new ArgumentException(ErrorMessage.EmailIsInvalid, nameof(createUserModel.Email));
+            }
+
+            Guard.ArgumentNotNullOrEmpty(createUserModel.HashedPassword, nameof(createUserModel.HashedPassword), ErrorMessage.PasswordIsRequired);
+        }
+
+        private void ValidateFormat(UpdateUserModel updateUserModel)
+        {
+            Guard.ArgumentNotNull(updateUserModel, nameof(updateUserModel));
+
+            if (!EmailIsValid(updateUserModel.Email))
+            {
+                throw new ArgumentException(ErrorMessage.EmailIsInvalid, nameof(updateUserModel.Email));
+            }
+
+            Guard.ArgumentNotNullOrEmpty(updateUserModel.HashedPassword, nameof(updateUserModel.HashedPassword), ErrorMessage.PasswordIsRequired);
+        }
+
+        private void ValidateFormatIfNeeded(UpdateUserModel updateUserModel)
+        {
+            if (updateUserModel.UserName == string.Empty)
+            {
+                throw new ArgumentException(ErrorMessage.UserNameIsRequired, nameof(updateUserModel.UserName));
+            }
+
+            if (updateUserModel.Email != null && !EmailIsValid(updateUserModel.Email))
+            {
+                throw new ArgumentException(ErrorMessage.EmailIsInvalid, nameof(updateUserModel.Email));
+            }
+        }
+
+        public bool EmailIsValid(string email)
+        {
+            var trimmedEmail = email.Trim();
+
+            try
+            {
+                var mailAddress = new MailAddress(email);
+                return mailAddress.Address == trimmedEmail;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UScheduler.WebApi.Users.Data.Migrations
 {
-    public partial class _001InitiaCreate : Migration
+    public partial class InitialCreate001 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
