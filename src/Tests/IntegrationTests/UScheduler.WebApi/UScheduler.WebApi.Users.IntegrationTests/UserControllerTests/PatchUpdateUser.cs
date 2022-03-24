@@ -1,16 +1,14 @@
-﻿using NUnit.Framework;
-using System.Net.Http;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System;
-using UScheduler.WebApi.Users.Models;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.AspNetCore.JsonPatch;
-using Microsoft.AspNetCore.JsonPatch.Operations;
-using System.Collections.Generic;
 using Newtonsoft.Json;
+using NUnit.Framework;
+using System;
+using System.Net;
+using System.Net.Http;
+using System.Text;
 using System.Text.Json;
+using System.Threading.Tasks;
+using UScheduler.WebApi.Users.Models;
 
 namespace UScheduler.WebApi.Users.IntegrationTests.UserControllerTests
 {

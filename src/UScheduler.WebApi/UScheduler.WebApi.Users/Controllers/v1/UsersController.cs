@@ -43,7 +43,7 @@ namespace UScheduler.WebApi.Users.Controllers
         public async Task<IActionResult> GetUserById(Guid id)
         {
             logger.LogDebug("Handeling GET request on api/v1/Users/{id}", id);
-            
+
             var result = await provider.GetUserByIdAsync(id);
 
             if (result.IsSuccess)

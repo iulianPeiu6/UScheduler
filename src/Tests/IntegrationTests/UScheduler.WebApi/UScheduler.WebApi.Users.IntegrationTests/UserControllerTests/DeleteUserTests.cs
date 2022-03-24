@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
+using System;
 using System.Net;
 using System.Threading.Tasks;
-using System;
 
 namespace UScheduler.WebApi.Users.IntegrationTests.UserControllerTests
 {

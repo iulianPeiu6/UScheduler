@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
 using System.Net.Mail;
 using UScheduler.WebApi.Users.Data;
 using UScheduler.WebApi.Users.Interfaces;
@@ -80,7 +79,7 @@ namespace UScheduler.WebApi.Users.Services
         public async Task<(bool Success, string Error)> ValidatePartialUpdateUserModel(Guid id, UpdateUserModel updateUserModel)
         {
             ValidateFormatIfNeeded(updateUserModel);
-            
+
             if (updateUserModel.Email != null)
             {
                 var emailIsTaken = await context.Users
