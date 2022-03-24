@@ -15,7 +15,7 @@ namespace UScheduler.WebApi.Users.IntegrationTests
     {
         private static IntegrationTestBase instance = new IntegrationTestBase();
         protected readonly HttpClient testClient;
-        protected readonly Guid invalidWorkspceId = Guid.Parse("5c675d5d-9c94-48cd-8c35-bfaaae334691");
+        protected readonly Guid inexistentWorkspceId = Guid.Parse("5c675d5d-9c94-48cd-8c35-bfaaae334691");
 
         protected IntegrationTestBase()
         {

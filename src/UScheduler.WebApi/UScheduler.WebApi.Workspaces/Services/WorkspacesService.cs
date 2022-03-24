@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -96,7 +97,7 @@ namespace UScheduler.WebApi.Workspaces.Services
             }
         }
 
-        public async Task<(bool IsSuccess, WorkspaceDto Workspace, string Error)> PartiallyUpdateWorkspaceAsync(Guid id, UpdateWorkspaceModel patchUpdateWorkspaceModel)
+        public async Task<(bool IsSuccess, WorkspaceDto Workspace, string Error)> PartiallyUpdateWorkspaceAsync(Guid id, JsonPatchDocument<Workspace> patchDoc)
         {
             try
             {
@@ -108,26 +109,7 @@ namespace UScheduler.WebApi.Workspaces.Services
                     return (false, null, ErrorMessage.WorkspaceNotFound);
                 }
 
-                if (patchUpdateWorkspaceModel.Title != null)
-                {
-                    workspace.Title = patchUpdateWorkspaceModel.Title;
-                }
-                if (patchUpdateWorkspaceModel.Description != null)
-                {
-                    workspace.Description = patchUpdateWorkspaceModel.Description;
-                }
-                if (patchUpdateWorkspaceModel.Owner != Guid.Empty)
-                {
-                    workspace.Owner = patchUpdateWorkspaceModel.Owner;
-                }
-                if (patchUpdateWorkspaceModel.AccessType != null)
-                {
-                    workspace.AccessType = patchUpdateWorkspaceModel.AccessType;
-                }
-                if (patchUpdateWorkspaceModel.WorkspaceType != null)
-                {
-                    workspace.WorkspaceType = patchUpdateWorkspaceModel.WorkspaceType;
-                }
+                patchDoc.ApplyTo(workspace);
 
                 context.Workspaces.Update(workspace);
                 await context.SaveChangesAsync();

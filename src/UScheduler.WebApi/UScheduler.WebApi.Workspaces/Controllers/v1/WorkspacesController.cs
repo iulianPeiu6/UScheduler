@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
+using UScheduler.WebApi.Workspaces.Data.Entities;
 using UScheduler.WebApi.Workspaces.Interfaces;
 using UScheduler.WebApi.Workspaces.Models;
 using UScheduler.WebApi.Workspaces.Statics;
@@ -89,15 +90,13 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] JsonPatchDocument<UpdateWorkspaceModel> patchDoc)
+        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] JsonPatchDocument<Workspace> patchDoc)
         {
             logger?.LogDebug($"Handeling PATCH request on api/v1/Workspaces/{id}");
+
             if (patchDoc != null)
             {
-                var workspace = new UpdateWorkspaceModel();
-                patchDoc.ApplyTo(workspace, ModelState);
-
-                var result = await provider.PartiallyUpdateWorkspaceAsync(id, workspace);
+                var result = await provider.PartiallyUpdateWorkspaceAsync(id, patchDoc);
 
                 if (result.IsSuccess)
                 {
@@ -111,7 +110,8 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
 
                 return BadRequest(new { message = result.Error });
             }
-            return NoContent();
+
+            return BadRequest();
         }
 
         [HttpDelete("{id}")]

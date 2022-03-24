@@ -1,26 +1,23 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using UScheduler.WebApi.Users.IntegrationTests;
 using UScheduler.WebApi.Workspaces.Models;
-using FluentAssertions;
-using UScheduler.WebApi.Workspaces.Data.Entities;
 
 namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTests
 {
-    public class FullUpdateWorkspaceTests : IntegrationTestBase
+    public class PutUpdateWorkspaceTests : IntegrationTestBase
     {
         [Test]
         public async Task Given_ValidWorkspace_When_CreateWorkspaceIsCalled_Then_ReturnCreatedWorkspaceAsync()
         {
             // Arange
-            var id = invalidWorkspceId;
+            var id = inexistentWorkspceId;
             var workspace = new UpdateWorkspaceModel
             {
                 Owner = Guid.Parse("c89a5809-9e53-4950-b2ac-9582f6813160"),

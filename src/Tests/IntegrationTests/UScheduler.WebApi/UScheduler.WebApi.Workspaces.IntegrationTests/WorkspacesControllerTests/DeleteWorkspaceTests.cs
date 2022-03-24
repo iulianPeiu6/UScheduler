@@ -27,7 +27,7 @@ namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTest
         public async Task Given_InvalidWorkspaceId_When_DeleteWorkspaceIsCalled_Then_ReturnNotFoundAsync()
         {
             // Arange
-            var id = invalidWorkspceId;
+            var id = inexistentWorkspceId;
 
             // Act
             var response = await testClient.DeleteAsync($"api/v1/Workspaces/{id}");
