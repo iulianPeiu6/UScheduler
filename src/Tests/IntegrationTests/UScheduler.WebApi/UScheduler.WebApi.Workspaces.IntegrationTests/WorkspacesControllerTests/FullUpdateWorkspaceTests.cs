@@ -40,39 +40,6 @@ namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTest
         }
 
         [Test]
-        public async Task Given_ValidWorkspaceIdWithInvalidUpdateRequest_When_FullUpdatedWorkspaceIsCalled_Then_ReturnBadRequestAsync()
-        {
-            // Arange
-            var id = Guid.Parse("367c9423-0d7a-49d5-8376-5619804271bf");
-            var workspace = new UpdateWorkspaceModel
-            {
-                Owner = Guid.Parse("c89a5809-9e53-4950-b2ac-9582f6813160"),
-                Title = "Title - With - More - Than - 64 - Characters - cDWEgnJeqbBbbsE0tVJkUPWdgs4lKKL5Yo8mRQcs7kcj33aPx8MgbAoNJ6c9qdEf",
-                Description = "Workspace - Update - 002 - Updated",
-                AccessType = "Public",
-                WorkspaceType = "Education"
-            };
-
-            // Act
-            var requestContent = new StringContent(JsonSerializer.Serialize(workspace), Encoding.UTF8, "application/json");
-            var response = await testClient.PutAsync($"api/v1/Workspaces/{id}", requestContent);
-            var responseContent = await response.Content.ReadAsStringAsync();
-            var updatedWorkspace = JsonSerializer.Deserialize<WorkspaceDto>(
-                responseContent,
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
-            // Asert
-            response.StatusCode.Should().Be(HttpStatusCode.OK);
-            updatedWorkspace.Should().NotBeNull();
-            updatedWorkspace?.Id.Should().NotBeEmpty();
-            updatedWorkspace?.Owner.Should().Be(workspace.Owner);
-            updatedWorkspace?.Title.Should().Be(workspace.Title);
-            updatedWorkspace?.Description.Should().Be(workspace.Description);
-            updatedWorkspace?.AccessType.Should().Be(workspace.AccessType);
-            updatedWorkspace?.WorkspaceType.Should().Be(workspace.WorkspaceType);
-        }
-
-        [Test]
         public async Task Given_ValidWorkspaceIdWithValidUpdateRequest_When_FullUpdatedWorkspaceIsCalled_Then_ReturnOkWithUpdatedWorkspaceAsync()
         {
             // Arange
