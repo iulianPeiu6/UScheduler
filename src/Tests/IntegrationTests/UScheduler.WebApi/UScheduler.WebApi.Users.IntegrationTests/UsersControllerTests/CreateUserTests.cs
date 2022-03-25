@@ -18,8 +18,8 @@ namespace UScheduler.WebApi.Users.IntegrationTests.UsersControllerTests
             // Arange
             var user = new CreateUserModel
             {
-                UserName = "username-004",
-                Email = "email.004@email.com",
+                UserName = "username-005",
+                Email = "email.005@email.com",
                 HashedPassword = "ABC1ABC9="
             };
 
@@ -49,7 +49,7 @@ namespace UScheduler.WebApi.Users.IntegrationTests.UsersControllerTests
             // Arange
             var user = new CreateUserModel
             {
-                UserName = "username-004",
+                UserName = "username-005",
                 Email = "invalid_email",
                 HashedPassword = "ABC1ABC9="
             };
@@ -70,7 +70,7 @@ namespace UScheduler.WebApi.Users.IntegrationTests.UsersControllerTests
             // Arange
             var user = new CreateUserModel
             {
-                UserName = "username-004",
+                UserName = "username-005",
                 Email = "email.003@email.com",
                 HashedPassword = "ABC1ABC9="
             };
@@ -113,7 +113,7 @@ namespace UScheduler.WebApi.Users.IntegrationTests.UsersControllerTests
             var user = new CreateUserModel
             {
                 UserName = "",
-                Email = "email.004@email.com",
+                Email = "email.006@email.com",
                 HashedPassword = "ABC1ABC9="
             };
 
@@ -134,7 +134,7 @@ namespace UScheduler.WebApi.Users.IntegrationTests.UsersControllerTests
             var user = new CreateUserModel
             {
                 UserName = "username",
-                Email = "email.004@email.com",
+                Email = "email.005@email.com",
                 HashedPassword = ""
             };
 

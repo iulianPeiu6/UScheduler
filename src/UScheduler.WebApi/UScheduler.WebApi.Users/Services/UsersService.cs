@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 using UScheduler.WebApi.Users.Data;
 using UScheduler.WebApi.Users.Data.Entities;
@@ -161,7 +162,7 @@ namespace UScheduler.WebApi.Users.Services
             }
         }
 
-        public async Task<(bool IsSuccess, DisplayUserModel? User, string ErrorMessage)> PartiallyUpdateUserAsync(Guid id, UpdateUserModel updateUserModel)
+        public async Task<(bool IsSuccess, DisplayUserModel? User, string ErrorMessage)> PartiallyUpdateUserAsync(Guid id, JsonPatchDocument<User> patchDoc)
         {
             try
             {
@@ -189,36 +190,13 @@ namespace UScheduler.WebApi.Users.Services
                     return (false, null, ErrorMessage.UserNotFound);
                 }
 
-                var validatedResult = await validator.ValidatePartialUpdateUserModel(id, updateUserModel);
+                patchDoc.ApplyTo(user);
+
+                var validatedResult = await validator.ValidateUser(id, user);
 
                 if (!validatedResult.Success)
                 {
                     return (false, null, validatedResult.Error);
-                }
-
-                if (updateUserModel.UserName != null)
-                {
-                    user.UserName = updateUserModel.UserName;
-                }
-
-                if (updateUserModel.Email != null)
-                {
-                    user.Email = updateUserModel.Email;
-                }
-
-                if (updateUserModel.HashedPassword != null)
-                {
-                    user.HashedPassword = updateUserModel.HashedPassword;
-                }
-
-                if (updateUserModel.AccountSettings?.EmailForNotification != null)
-                {
-                    user.AccountSettings.EmailForNotification = updateUserModel.AccountSettings.EmailForNotification;
-                }
-
-                if (updateUserModel.AccountSettings?.SendNotificationOnEmail != null)
-                {
-                    user.AccountSettings.SendNotificationOnEmail = updateUserModel.AccountSettings.SendNotificationOnEmail;
                 }
 
                 context.Users.Update(user);

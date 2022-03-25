@@ -36,7 +36,7 @@ namespace UScheduler.WebApi.Users.IntegrationTests.UsersControllerTests
         public async Task Given_InvalidUserId_When_GetUserByIdIsCalled_Then_ReturnNotFoundAsync()
         {
             // Arange
-            var userId = invalidUserId;
+            var userId = inexistentUserId;
 
             // Act
             var response = await testClient.GetAsync($"api/v1/Users/{userId}");

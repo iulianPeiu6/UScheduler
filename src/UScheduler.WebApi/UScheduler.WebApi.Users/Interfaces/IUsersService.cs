@@ -1,4 +1,6 @@
-﻿using UScheduler.WebApi.Users.Models;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using UScheduler.WebApi.Users.Data.Entities;
+using UScheduler.WebApi.Users.Models;
 
 namespace UScheduler.WebApi.Users.Interfaces
 {
@@ -9,6 +11,6 @@ namespace UScheduler.WebApi.Users.Interfaces
         Task<(bool IsSuccess, IEnumerable<DisplayUserModel>? Users, string ErrorMessage)> GetAllUsersAsync();
         Task<(bool IsSuccess, DisplayUserModel? User, string ErrorMessage)> GetUserByIdAsync(Guid id);
         Task<(bool IsSuccess, DisplayUserModel? User, string ErrorMessage)> FullyUpdateUserAsync(Guid id, UpdateUserModel updateUserModel);
-        Task<(bool IsSuccess, DisplayUserModel? User, string ErrorMessage)> PartiallyUpdateUserAsync(Guid id, UpdateUserModel updateUserModel);
+        Task<(bool IsSuccess, DisplayUserModel? User, string ErrorMessage)> PartiallyUpdateUserAsync(Guid id, JsonPatchDocument<User> patchDoc);
     }
 }

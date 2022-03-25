@@ -12,13 +12,13 @@ using UScheduler.WebApi.Users.Models;
 
 namespace UScheduler.WebApi.Users.IntegrationTests.UsersControllerTests
 {
-    public class PatchUpdateUser : IntegrationTestBase
+    public class PatchUpdateUserTests : IntegrationTestBase
     {
         [Test]
         public async Task Given_InvalidUser_When_PatchUpdateUserIsCalled_Then_Return404NotFoundAsync()
         {
             // Arange
-            var userId = invalidUserId;
+            var userId = inexistentUserId;
             var patchDoc = new JsonPatchDocument<UpdateUserModel>();
             patchDoc.Replace(u => u.UserName, "username-new");
             var requestBody = JsonConvert.SerializeObject(patchDoc);

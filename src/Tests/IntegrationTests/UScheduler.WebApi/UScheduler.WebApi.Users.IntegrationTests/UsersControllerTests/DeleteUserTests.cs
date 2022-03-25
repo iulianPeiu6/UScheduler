@@ -25,7 +25,7 @@ namespace UScheduler.WebApi.Users.IntegrationTests.UsersControllerTests
         public async Task Given_InvalidUserId_When_DeleteUserIsCalled_Then_ReturnNotFoundAsync()
         {
             // Arange
-            var userId = invalidUserId;
+            var userId = inexistentUserId;
 
             // Act
             var response = await testClient.DeleteAsync($"api/v1/Users/{userId}");

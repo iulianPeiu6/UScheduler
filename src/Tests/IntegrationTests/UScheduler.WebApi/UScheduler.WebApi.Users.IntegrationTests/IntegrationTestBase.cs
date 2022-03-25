@@ -13,7 +13,7 @@ namespace UScheduler.WebApi.Users.IntegrationTests
     {
         private static IntegrationTestBase instance = new IntegrationTestBase();
         protected readonly HttpClient testClient;
-        protected readonly Guid invalidUserId = Guid.Parse("79cf1055-efa8-4dab-80ef-c9a59d4adcb1");
+        protected readonly Guid inexistentUserId = Guid.Parse("79cf1055-efa8-4dab-80ef-c9a59d4adcb1");
 
         protected IntegrationTestBase()
         {
@@ -98,6 +98,20 @@ namespace UScheduler.WebApi.Users.IntegrationTests
                 AccountSettings = new AccountSettings()
                 {
                     EmailForNotification = "email.003@email.com",
+                    SendNotificationOnEmail = false
+                }
+            });
+
+            context.Add(new User
+            {
+                Id = Guid.Parse("2b0f8ed4-0e9d-489f-b003-e34fa24a8f8a"),
+                UserName = "username-004",
+                Email = "email.004@email.com",
+                RegistrationDate = DateTime.Now,
+                HashedPassword = "AABBCCDD981B=",
+                AccountSettings = new AccountSettings()
+                {
+                    EmailForNotification = "email.004@email.com",
                     SendNotificationOnEmail = false
                 }
             });

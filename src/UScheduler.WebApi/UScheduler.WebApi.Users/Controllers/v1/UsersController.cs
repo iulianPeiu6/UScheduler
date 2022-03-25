@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
+using UScheduler.WebApi.Users.Data.Entities;
 using UScheduler.WebApi.Users.Interfaces;
 using UScheduler.WebApi.Users.Models;
 using UScheduler.WebApi.Users.Statics;
@@ -110,16 +111,13 @@ namespace UScheduler.WebApi.Users.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        public async Task<IActionResult> UpdateUser(Guid id, [FromBody] JsonPatchDocument<UpdateUserModel> patchDoc)
+        public async Task<IActionResult> UpdateUser(Guid id, [FromBody] JsonPatchDocument<User> patchDoc)
         {
             logger.LogDebug("Handeling PATCH request on api/v1/Users/{id}", id);
 
             if (patchDoc != null)
             {
-                var user = new UpdateUserModel();
-                patchDoc.ApplyTo(user, ModelState);
-
-                var result = await provider.PartiallyUpdateUserAsync(id, user);
+                var result = await provider.PartiallyUpdateUserAsync(id, patchDoc);
 
                 if (result.IsSuccess)
                 {
