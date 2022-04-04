@@ -28,12 +28,10 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
             this.logger = logger;
         }
 
-        [HttpGet("GroupedByOwners/{ownerId}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetWorkspacesByOwnerIdAsync(Guid ownerId)
+        [HttpGet]
+        public async Task<IActionResult> GetWorkspacesByOwnerIdAsync([FromQuery] Guid ownerId)
         {
-            logger?.LogDebug($"Handeling GET request on api/v1/Workspaces/GroupedByOwners/{ownerId}");
+            logger?.LogDebug($"Handeling GET request on api/v1/Workspaces?ownerId={ownerId}");
             var result = await provider.GetOwnerWorkspacesAsync(ownerId);
 
             if (result.IsSuccess)
@@ -45,9 +43,6 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> CreateWorkspaceAsync([FromBody] CreateWorkspaceModel workspace)
         {
             logger?.LogDebug("Handeling POST request on api/v1/Workspaces");
@@ -62,10 +57,6 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
         }
 
         [HttpPut("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] UpdateWorkspaceModel workspace)
         {
             logger?.LogDebug($"Handeling PUT request on api/v1/Workspaces/{id}");
@@ -85,11 +76,6 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
         }
 
         [HttpPatch("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] JsonPatchDocument<Workspace> patchDoc)
         {
             logger?.LogDebug($"Handeling PATCH request on api/v1/Workspaces/{id}");

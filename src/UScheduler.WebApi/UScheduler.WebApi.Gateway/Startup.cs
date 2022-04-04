@@ -1,16 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System;
-using UScheduler.WebApi.Workspaces.Data;
-using UScheduler.WebApi.Workspaces.Interfaces;
-using UScheduler.WebApi.Workspaces.Services;
+using Ocelot.Cache.CacheManager;
+using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
 
-namespace UScheduler.WebApi.Workspaces
+namespace UScheduler.WebApi.Gateway
 {
     public class Startup
     {
@@ -25,19 +23,18 @@ namespace UScheduler.WebApi.Workspaces
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers()
-                .AddNewtonsoftJson();
+            services.AddControllers();
+
+            services.AddOcelot(Configuration)
+                .AddCacheManager(c =>
+                {
+                    c.WithDictionaryHandle();
+                });
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "UScheduler.WebApi.Workspaces", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "UScheduler.WebApi.Gateway", Version = "v1" });
             });
-
-            services.AddScoped<IWorkspacesService, WorkspacesService>();
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-            services.AddDbContext<WorkspacesContext>(
-                            options => options.UseSqlServer(Configuration.GetConnectionString("WorkspacesDB")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,7 +44,7 @@ namespace UScheduler.WebApi.Workspaces
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "UScheduler.WebApi.Workspaces v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "UScheduler.WebApi.Gateway v1"));
             }
 
             app.UseHttpsRedirection();
@@ -56,23 +53,12 @@ namespace UScheduler.WebApi.Workspaces
 
             app.UseAuthorization();
 
+            app.UseOcelot();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
-
-            if (env.IsProduction())
-            {
-                InitializeDatabase(app);
-            }
-        }
-
-        private void InitializeDatabase(IApplicationBuilder app)
-        {
-            using (var scope = app?.ApplicationServices?.GetService<IServiceScopeFactory>()?.CreateScope())
-            {
-                scope?.ServiceProvider.GetRequiredService<WorkspacesContext>().Database.Migrate();
-            }
         }
     }
 }

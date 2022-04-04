@@ -1,13 +1,13 @@
-﻿using NUnit.Framework;
-using System.Net.Http;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using System;
-using UScheduler.WebApi.Users.Models;
-using UScheduler.WebApi.Users.Data.Entities;
-using FluentAssertions;
+using System.Net;
+using System.Net.Http;
+using System.Text;
 using System.Text.Json;
+using System.Threading.Tasks;
+using UScheduler.WebApi.Users.Data.Entities;
+using UScheduler.WebApi.Users.Models;
 
 namespace UScheduler.WebApi.Users.IntegrationTests.UsersControllerTests
 {

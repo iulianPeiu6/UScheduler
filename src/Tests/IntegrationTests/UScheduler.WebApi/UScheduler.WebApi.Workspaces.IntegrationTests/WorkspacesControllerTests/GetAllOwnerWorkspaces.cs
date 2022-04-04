@@ -19,7 +19,7 @@ namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTest
             var ownerId = Guid.Parse("e27387c0-d043-4a74-861c-f9a274774974");
 
             // Act
-            var response = await testClient.GetAsync($"api/v1/Workspaces/GroupedByOwners/{ownerId}");
+            var response = await testClient.GetAsync($"api/v1/Workspaces?ownerId={ownerId}");
             var responseContent = await response.Content.ReadAsStringAsync();
             var ownerWorkspaces = JsonSerializer.Deserialize<List<WorkspaceDto>>(
                 responseContent,

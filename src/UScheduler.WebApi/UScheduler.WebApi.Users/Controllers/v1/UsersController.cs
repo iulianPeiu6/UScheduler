@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Mime;
 using UScheduler.WebApi.Users.Data.Entities;
 using UScheduler.WebApi.Users.Interfaces;
 using UScheduler.WebApi.Users.Models;
@@ -22,8 +21,6 @@ namespace UScheduler.WebApi.Users.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetUsers()
         {
             logger.LogDebug("Handeling GET request on api/v1/Users");
@@ -39,8 +36,6 @@ namespace UScheduler.WebApi.Users.Controllers
         }
 
         [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetUserById(Guid id)
         {
             logger.LogDebug("Handeling GET request on api/v1/Users/{id}", id);
@@ -56,10 +51,6 @@ namespace UScheduler.WebApi.Users.Controllers
         }
 
         [HttpPost]
-        [Consumes(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status409Conflict)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserModel user)
         {
             logger.LogDebug("Handeling POST request on api/v1/Users");
@@ -79,10 +70,6 @@ namespace UScheduler.WebApi.Users.Controllers
         }
 
         [HttpPut("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public async Task<IActionResult> UpdateUser(Guid id, [FromBody] UpdateUserModel user)
         {
             logger.LogDebug("Handeling PUT request on api/v1/Users/{id}", id);
@@ -107,10 +94,6 @@ namespace UScheduler.WebApi.Users.Controllers
         }
 
         [HttpPatch("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public async Task<IActionResult> UpdateUser(Guid id, [FromBody] JsonPatchDocument<User> patchDoc)
         {
             logger.LogDebug("Handeling PATCH request on api/v1/Users/{id}", id);
@@ -141,8 +124,6 @@ namespace UScheduler.WebApi.Users.Controllers
         }
 
         [HttpDelete("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteUser(Guid id)
         {
             logger.LogDebug("Handeling DELETE request on api/v1/Users/{id}", id);

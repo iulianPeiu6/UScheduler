@@ -132,7 +132,7 @@ namespace UScheduler.WebApi.Users.Services
             Guard.ArgumentNotNullOrEmpty(user.UserName, nameof(user.UserName), ErrorMessage.UserNameIsRequired);
             Guard.ArgumentNotNullOrEmpty(user.Email, nameof(user.Email), ErrorMessage.EmailIsRequired);
             Guard.ArgumentNotNullOrEmpty(user.HashedPassword, nameof(user.HashedPassword), ErrorMessage.PasswordIsRequired);
-            
+
             if (!EmailIsValid(user.Email))
             {
                 throw new ArgumentException(ErrorMessage.EmailIsInvalid, nameof(user.Email));
