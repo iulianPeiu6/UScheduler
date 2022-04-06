@@ -67,7 +67,7 @@ namespace UScheduler.WebApi.Workspaces
             }
         }
 
-        private void InitializeDatabase(IApplicationBuilder app)
+        private static void InitializeDatabase(IApplicationBuilder app)
         {
             using (var scope = app?.ApplicationServices?.GetService<IServiceScopeFactory>()?.CreateScope())
             {
