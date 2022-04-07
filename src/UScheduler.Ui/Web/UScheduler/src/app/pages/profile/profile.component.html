@@ -1,17 +1,18 @@
-<h2 class="content-block">Profile</h2>
+<div *ngIf="auth.user$ | async as user">
+  <h2 class="content-block">Profile</h2>
 
-<div class="content-block dx-card responsive-paddings">
-  <div class="form-avatar">
-    <img src="https://js.devexpress.com/Demos/WidgetsGallery/JSDemos/{{employee.Picture}}"/>
+  <div class="content-block dx-card responsive-paddings">
+    <div class="form-avatar">
+      <img [src]="user?.picture"/>
+    </div>
+    <span>"ToEdit: Add description"</span>
   </div>
-  <span>{{employee.Notes}}</span>
-</div>
 
-<div class="content-block dx-card responsive-paddings">
-  <dx-form id="form"
-    [formData]="employee"
-    labelLocation="top"
-    [colCountByScreen]="colCountByScreen"
-  >
-  </dx-form>
+  <div class="content-block dx-card responsive-paddings">
+    <dx-form
+      [formData]="user"
+      labelLocation="top"
+      [colCountByScreen]="colCountByScreen">
+    </dx-form>
+  </div>
 </div>

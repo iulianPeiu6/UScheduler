@@ -5,17 +5,34 @@ export const navigation = [
     icon: 'home'
   },
   {
-    text: 'Examples',
+    text: 'Workspaces',
     icon: 'folder',
     items: [
       {
-        text: 'Profile',
-        path: '/profile'
+        text: 'Recent',
+        icon: 'folder',
+        path: '/workspaces/recent'
       },
       {
-        text: 'Tasks',
-        path: '/tasks'
+        text: 'Private',
+        icon: 'folder',
+        path: '/workspaces/private'
+      },
+      {
+        text: 'Shared',
+        icon: 'group',
+        path: '/workspaces/shared'
+      },
+      {
+        text: 'Favorite',
+        icon: 'favorites',
+        path: '/workspaces/favorites'
       }
     ]
+  },
+  {
+    text: 'Create Workspace',
+    icon: 'newfolder',
+    path: '/workspaces/new'
   }
 ];
