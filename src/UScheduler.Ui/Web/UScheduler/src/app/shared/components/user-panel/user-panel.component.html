@@ -1,7 +1,12 @@
 <div class="user-panel">
-  <div class="user-info">
+  
+  <div  class="user-info">
     <div class="image-container">
-      <div class="user-image"></div>
+      <img
+        [src]="user?.picture"
+        height="100%"
+        width="100%"
+      />
     </div>
     <div class="user-name">{{user?.email}}</div>
   </div>

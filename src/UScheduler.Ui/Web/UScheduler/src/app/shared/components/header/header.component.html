@@ -19,7 +19,18 @@
     </dxi-item>
     <dxi-item
       location="after"
+      cssClass="header-title"
+      *ngIf="(auth.isAuthenticated$ | async) === false"
+      [text]="title">
+      <dx-button
+        text="Log in"
+        (onClick)="auth.loginWithRedirect()">
+      </dx-button>
+    </dxi-item>
+    <dxi-item
+      location="after"
       locateInMenu="auto"
+      *ngIf="(auth.isAuthenticated$ | async) === true"
       menuItemTemplate="menuItem">
       <div *dxTemplate="let data of 'item'">
         <dx-button
@@ -28,13 +39,13 @@
           height="100%"
           stylingMode="text">
           <div *dxTemplate="let data of 'content'">
-            <app-user-panel [user]="user" [menuItems]="userMenuItems" menuMode="context"></app-user-panel>
+            <app-user-panel [user]="auth.user$ | async" [menuItems]="userMenuItems" menuMode="context"></app-user-panel>
           </div>
         </dx-button>
       </div>
     </dxi-item>
     <div *dxTemplate="let data of 'menuItem'">
-      <app-user-panel [user]="user" [menuItems]="userMenuItems" menuMode="list"></app-user-panel>
+      <app-user-panel [user]="auth.user$ | async" [menuItems]="userMenuItems" menuMode="list"></app-user-panel>
     </div>
   </dx-toolbar>
 </header>

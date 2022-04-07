@@ -1,19 +1,19 @@
 import { Component, NgModule, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { AuthService, IUser } from '../../services';
 import { UserPanelModule } from '../user-panel/user-panel.component';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
-
 import { Router } from '@angular/router';
+import { DxiButtonModule } from 'devextreme-angular/ui/nested';
+import { AuthService, User } from '@auth0/auth0-angular';
+
 @Component({
   selector: 'app-header',
   templateUrl: 'header.component.html',
   styleUrls: ['./header.component.scss']
 })
 
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   @Output()
   menuToggle = new EventEmitter<boolean>();
 
@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
   @Input()
   title!: string;
 
-  user: IUser | null = { email: '' };
+  user: User | null | undefined;
 
   userMenuItems = [{
     text: 'Profile',
@@ -36,14 +36,11 @@ export class HeaderComponent implements OnInit {
     text: 'Logout',
     icon: 'runner',
     onClick: () => {
-      this.authService.logOut();
+      this.auth.logout();
     }
   }];
 
-  constructor(private authService: AuthService, private router: Router) { }
-
-  ngOnInit() {
-    this.authService.getUser().then((e) => this.user = e.data);
+  constructor(public auth: AuthService, private router: Router) { 
   }
 
   toggleMenu = () => {
@@ -56,7 +53,8 @@ export class HeaderComponent implements OnInit {
     CommonModule,
     DxButtonModule,
     UserPanelModule,
-    DxToolbarModule
+    DxToolbarModule,
+    DxiButtonModule
   ],
   declarations: [ HeaderComponent ],
   exports: [ HeaderComponent ]

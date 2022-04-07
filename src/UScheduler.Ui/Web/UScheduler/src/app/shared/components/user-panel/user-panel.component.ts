@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { DxListModule } from 'devextreme-angular/ui/list';
 import { DxContextMenuModule } from 'devextreme-angular/ui/context-menu';
-import { IUser } from '../../services/auth.service';
+import { AuthService, User } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-user-panel',
@@ -19,9 +19,9 @@ export class UserPanelComponent {
   menuMode!: string;
 
   @Input()
-  user!: IUser | null;
+  user!: User | null | undefined;
 
-  constructor() {}
+  constructor(public auth: AuthService) {}
 }
 
 @NgModule({

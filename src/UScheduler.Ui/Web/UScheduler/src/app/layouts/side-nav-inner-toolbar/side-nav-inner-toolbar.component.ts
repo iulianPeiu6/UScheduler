@@ -100,7 +100,14 @@ export class SideNavInnerToolbarComponent implements OnInit {
 }
 
 @NgModule({
-  imports: [ SideNavigationMenuModule, DxDrawerModule, HeaderModule, DxToolbarModule, DxScrollViewModule, CommonModule ],
+  imports: [ 
+    SideNavigationMenuModule, 
+    DxDrawerModule, 
+    HeaderModule, 
+    DxToolbarModule, 
+    DxScrollViewModule, 
+    CommonModule 
+  ],
   exports: [ SideNavInnerToolbarComponent ],
   declarations: [ SideNavInnerToolbarComponent ]
 })
