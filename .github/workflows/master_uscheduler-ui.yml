@@ -20,18 +20,28 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '16.x'
+          
+      - name: Add auth config          
+        run: |
+            echo $AUTH_CONFIG > ./Homework4/UScheduler.Ui/Web/UScheduler/auth-config.json
+        shell: bash
+        env:
+          AUTH_CONFIG : ${{ secrets.AUTH_CONFIG }}
 
       - name: npm install, build, and test
         run: |
           npm install
-          npm run build --if-present
-          npm run test --if-present
+          npm run build --prod
+        working-directory: ./src/UScheduler.Ui/Web/UScheduler
+        
+      - name: Zip artifact for deployment
+        run: zip release.zip ./src/UScheduler.Ui/Web/UScheduler/* -r
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: .
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -45,6 +55,9 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: node-app
+          
+      - name: unzip artifact for deployment
+        run: unzip release.zip
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
@@ -53,4 +66,4 @@ jobs:
           app-name: 'uscheduler-ui'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B5048B2FA8F84BF991FEF391366B46D7 }}
-          package: .
+          package: ./src/UScheduler.Ui/Web/UScheduler/dist/uscheduler
