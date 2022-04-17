@@ -23,7 +23,7 @@ jobs:
           
       - name: Add auth config          
         run: |
-            echo $AUTH_CONFIG > ./Homework4/UScheduler.Ui/Web/UScheduler/auth-config.json
+            echo $AUTH_CONFIG > ./src/UScheduler.Ui/Web/UScheduler/auth-config.json
         shell: bash
         env:
           AUTH_CONFIG : ${{ secrets.AUTH_CONFIG }}
