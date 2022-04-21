@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
-using UScheduler.Common.SecretsManager;
 using UScheduler.WebApi.Workspaces.Data;
 using UScheduler.WebApi.Workspaces.Interfaces;
 using UScheduler.WebApi.Workspaces.Services;

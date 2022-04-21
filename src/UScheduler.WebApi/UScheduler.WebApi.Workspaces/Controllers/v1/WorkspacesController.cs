@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
-using Azure.Security.KeyVault.Secrets;
-using UScheduler.Common.SecretsManager;
 using UScheduler.WebApi.Workspaces.Data.Entities;
 using UScheduler.WebApi.Workspaces.Interfaces;
 using UScheduler.WebApi.Workspaces.Models;

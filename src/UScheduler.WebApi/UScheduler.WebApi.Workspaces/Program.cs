@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using UScheduler.Common.SecretsManager;
 
 namespace UScheduler.WebApi.Workspaces
 {
