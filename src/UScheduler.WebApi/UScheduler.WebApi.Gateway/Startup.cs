@@ -8,7 +8,6 @@ using Microsoft.OpenApi.Models;
 using Ocelot.Cache.CacheManager;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
-using System.Threading.Tasks;
 
 namespace UScheduler.WebApi.Gateway
 {
@@ -46,7 +45,7 @@ namespace UScheduler.WebApi.Gateway
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public async Task ConfigureAsync(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -63,7 +62,7 @@ namespace UScheduler.WebApi.Gateway
 
             app.UseAuthorization();
 
-            await app.UseOcelot();
+            app.UseOcelot().Wait();
 
             app.UseEndpoints(endpoints =>
             {
