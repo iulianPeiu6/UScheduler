@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { AuthService } from '@auth0/auth0-angular';
+import { DxFormModule } from 'devextreme-angular';
 
 @Component({
   templateUrl: 'profile.component.html',
@@ -18,3 +20,13 @@ export class ProfileComponent {
     };
   }
 }
+
+@NgModule({
+  imports: [
+    BrowserModule,
+    DxFormModule
+  ],
+  declarations: [ ],
+  exports: [ ]
+})
+export class ProfileModule { }

@@ -5,6 +5,7 @@ export const environment = {
   auth: {
     domain: authConfig.domain,
     clientId: authConfig.clientId,
-    redirectUri: window.location.origin
+    redirectUri: window.location.origin,
+    audience: authConfig.audience
   }
 };

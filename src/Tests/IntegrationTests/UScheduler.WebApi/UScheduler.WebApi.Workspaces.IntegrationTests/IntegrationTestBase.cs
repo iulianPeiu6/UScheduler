@@ -68,12 +68,12 @@ namespace UScheduler.WebApi.Users.IntegrationTests
                 Owner = "owner-001@email.com",
                 Title = "Workspace - 001",
                 Description = "Workspace - Base - 001",
-                AccessType = "Private",
+                AccessLevel = "Private",
                 Colabs = new List<string>()
                 {
                     "owner-001@email.com"
                 },
-                WorkspaceType = "Basic",
+                WorkspaceTemplate = "Basic",
                 CreatedAt = DateTime.UtcNow,
                 CreatedBy = "owner-001@email.com",
                 UpdatedAt = DateTime.UtcNow,
@@ -86,12 +86,12 @@ namespace UScheduler.WebApi.Users.IntegrationTests
                 Owner = "owner-001@email.com",
                 Title = "Workspace - 002",
                 Description = "Workspace - Update - 002",
-                AccessType = "Private",
+                AccessLevel = "Private",
                 Colabs = new List<string>()
                 {
                     "owner-001@email.com"
                 },
-                WorkspaceType = "Basic",
+                WorkspaceTemplate = "Basic",
                 CreatedAt = DateTime.UtcNow,
                 CreatedBy = "owner-001@email.com",
                 UpdatedAt = DateTime.UtcNow,
@@ -104,12 +104,12 @@ namespace UScheduler.WebApi.Users.IntegrationTests
                 Owner = "owner-001@email.com",
                 Title = "Workspace - 003",
                 Description = "Workspace - Delete - 003",
-                AccessType = "Private",
+                AccessLevel = "Private",
                 Colabs = new List<string>()
                 {
                     "owner-001@email.com"
                 },
-                WorkspaceType = "Basic"
+                WorkspaceTemplate = "Basic"
             });
 
             context.Add(new Workspace
@@ -118,12 +118,12 @@ namespace UScheduler.WebApi.Users.IntegrationTests
                 Owner = "owner-002@email.com",
                 Title = "Workspace - 004",
                 Description = "Workspace - 004",
-                AccessType = "Private",
+                AccessLevel = "Private",
                 Colabs = new List<string>()
                 {
                     "owner-002@email.com"
                 },
-                WorkspaceType = "Basic",
+                WorkspaceTemplate = "Basic",
                 CreatedAt = DateTime.UtcNow,
                 CreatedBy = "owner-002@email.com",
                 UpdatedAt = DateTime.UtcNow,

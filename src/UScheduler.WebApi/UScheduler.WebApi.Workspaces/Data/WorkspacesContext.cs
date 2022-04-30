@@ -27,10 +27,10 @@ namespace UScheduler.WebApi.Workspaces.Data
                 builder.Property(w => w.Owner)
                     .IsRequired();
 
-                builder.Property(w => w.AccessType)
+                builder.Property(w => w.AccessLevel)
                     .IsRequired();
 
-                builder.Property(w => w.WorkspaceType)
+                builder.Property(w => w.WorkspaceTemplate)
                     .IsRequired();
 
                 var colabsComparer = new ValueComparer<List<string>>(

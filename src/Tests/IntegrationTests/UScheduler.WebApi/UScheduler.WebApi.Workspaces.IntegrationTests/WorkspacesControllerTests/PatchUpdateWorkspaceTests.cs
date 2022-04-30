@@ -44,7 +44,7 @@ namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTest
             patchDoc.Replace(w => w.Title, "Workspace - 002 - Patch - Updated");
             patchDoc.Replace(w => w.Description, "Workspace - 002 - Patch - Updated");
             patchDoc.Replace(w => w.Owner, "owner-new-003@email.com");
-            patchDoc.Replace(w => w.AccessType, "Private");
+            patchDoc.Replace(w => w.AccessLevel, "Private");
             patchDoc.Add(w => w.Colabs, "owner-new-004@email.com");
 
             // Act
@@ -65,7 +65,7 @@ namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTest
             updatedWorkspace?.Owner.Should().Be("owner-new-003@email.com");
             updatedWorkspace?.Title.Should().Be("Workspace - 002 - Patch - Updated");
             updatedWorkspace?.Description.Should().Be("Workspace - 002 - Patch - Updated");
-            updatedWorkspace?.AccessType.Should().Be("Private");
+            updatedWorkspace?.AccessLevel.Should().Be("Private");
             updatedWorkspace?.Colabs.Should().Contain("owner-new-004@email.com");
             updatedWorkspace?.UpdatedBy.Should().Contain("owner-new-003@email.com");
             updatedWorkspace?.UpdatedAt.Should().BeCloseTo(DateTime.UtcNow, new TimeSpan(0, 0, 59));
@@ -80,7 +80,7 @@ namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTest
             patchDoc.Replace(w => w.Title, "Workspace - 002 - Patch - Updated");
             patchDoc.Replace(w => w.Description, "Workspace - 002 - Patch - Updated");
             patchDoc.Replace(w => w.Owner, "owner-new-003@email.com");
-            patchDoc.Replace(w => w.AccessType, "Private");
+            patchDoc.Replace(w => w.AccessLevel, "Private");
             patchDoc.Add(w => w.Colabs, "owner-new-004@email.com");
 
             // Act

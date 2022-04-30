@@ -13,11 +13,11 @@ namespace UScheduler.WebApi.Workspaces.Data.Entities
 
         public string Owner { get; set; }
 
-        public string AccessType { get; set; }
+        public string AccessLevel { get; set; }
 
         public List<string> Colabs { get; set; }
 
-        public string WorkspaceType { get; set; }
+        public string WorkspaceTemplate { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

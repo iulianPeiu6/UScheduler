@@ -22,7 +22,7 @@ namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTest
             {
                 Title = "Workspace - 002 - Updated",
                 Description = "Workspace - Update - 002 - Updated",
-                AccessType = "Public"
+                AccessLevel = "Public"
             };
 
             // Act
@@ -46,7 +46,7 @@ namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTest
             {
                 Title = "Workspace - 002 - Updated",
                 Description = "Workspace - Update - 002 - Updated",
-                AccessType = "Public",
+                AccessLevel = "Public",
             };
 
             // Act
@@ -67,8 +67,8 @@ namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTest
             updatedWorkspace?.Owner.Should().NotBeNullOrEmpty();
             updatedWorkspace?.Title.Should().Be(workspace.Title);
             updatedWorkspace?.Description.Should().Be(workspace.Description);
-            updatedWorkspace?.AccessType.Should().Be(workspace.AccessType);
-            updatedWorkspace?.WorkspaceType.Should().NotBeNullOrEmpty();
+            updatedWorkspace?.AccessLevel.Should().Be(workspace.AccessLevel);
+            updatedWorkspace?.WorkspaceTemplate.Should().NotBeNullOrEmpty();
             updatedWorkspace?.UpdatedBy.Should().Be("owner-001@email.com");
             updatedWorkspace?.UpdatedAt.Should().BeCloseTo(DateTime.UtcNow, new TimeSpan(0, 0, 59));
         }

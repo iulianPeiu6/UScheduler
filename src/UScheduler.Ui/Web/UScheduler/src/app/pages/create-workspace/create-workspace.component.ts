@@ -4,7 +4,7 @@ import { DxButtonModule, DxFormModule, DxPopupModule, DxSelectBoxModule, DxTextA
 import { DxiItemModule } from 'devextreme-angular/ui/nested';
 import ArrayStore from 'devextreme/data/array_store';
 import DataSource from 'devextreme/data/data_source';
-import { Workspace, WorkspacesService } from '../../services/workspaces.service';
+import { Workspace, WorkspacesService } from '../../shared/services/workspaces.service';
 
 @Component({
   selector: 'app-create-workspace',
@@ -13,21 +13,21 @@ import { Workspace, WorkspacesService } from '../../services/workspaces.service'
 })
 export class CreateWorkspaceComponent{
   workspace: Workspace;
-  accessTypes: DataSource;
-  workspaceTypes: DataSource;
+  accessLevels: DataSource;
+  workspaceTemplates: DataSource;
   labelMode: string;
 
   constructor(private workspacesService: WorkspacesService) { 
     this.workspace = new Workspace();
 
-    this.accessTypes = new DataSource({
+    this.accessLevels = new DataSource({
       store: {
           type: "array",
           data: [ 'Private', 'Public' ]
       }
     });
 
-    this.workspaceTypes = new DataSource({
+    this.workspaceTemplates = new DataSource({
       store: {
           type: "array",
           data: [ 'Empty', 'Basic' ]
@@ -54,7 +54,7 @@ export class CreateWorkspaceComponent{
     DxSelectBoxModule,
     DxButtonModule
   ],
-  declarations: [ CreateWorkspaceComponent ],
-  exports: [ CreateWorkspaceComponent ]
+  declarations: [ ],
+  exports: [ ]
 })
 export class CreateWorkspaceModule { }

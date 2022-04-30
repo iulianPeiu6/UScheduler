@@ -22,7 +22,14 @@
       "UpstreamHttpMethod": [
         "POST"
       ],
-      "DangerousAcceptAnyServerCertificateValidator": true
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "BaseAuthProvider",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "CreatedBy": "Claims[https://uscheduler-api-gateway.azurewebsites.net/email] > value"
+      }
     },
     {
       "DownstreamPathTemplate": "/api/v1/Workspaces/{id}",
@@ -48,7 +55,11 @@
         "PATCH",
         "DELETE"
       ],
-      "DangerousAcceptAnyServerCertificateValidator": true
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "BaseAuthProvider",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/v1/Workspaces?owner={owner}",
@@ -72,7 +83,11 @@
       "UpstreamHttpMethod": [
         "GET"
       ],
-      "DangerousAcceptAnyServerCertificateValidator": true
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "BaseAuthProvider",
+        "AllowedScopes": []
+      }
     }
   ],
   "GlobalConfiguration": {

@@ -39,7 +39,14 @@ namespace UScheduler.WebApi.Workspaces.Services
                 workspace.CreatedAt = DateTime.UtcNow;
                 workspace.UpdatedAt = workspace.CreatedAt;
                 workspace.Owner = createWorkspaceModel.CreatedBy;
-                workspace.Colabs = new List<string>() { createWorkspaceModel.CreatedBy };
+                workspace.Colabs = createWorkspaceModel.Colabs;
+                if (workspace.Colabs is null)
+                {
+                    workspace.Colabs = new List<string>();
+                }
+                workspace.Colabs.Add(createWorkspaceModel.CreatedBy);
+                workspace.Colabs = workspace.Colabs.Distinct().ToList();
+
                 var response = await context.Workspaces.AddAsync(workspace);
                 workspace = response.Entity;
                 await context.SaveChangesAsync();
@@ -85,7 +92,7 @@ namespace UScheduler.WebApi.Workspaces.Services
 
                 workspace.Title = updateWorkspaceModel.Title;
                 workspace.Description = updateWorkspaceModel.Description;
-                workspace.AccessType = updateWorkspaceModel.AccessType;
+                workspace.AccessLevel = updateWorkspaceModel.AccessLevel;
                 workspace.UpdatedBy = updateWorkspaceModel.UpdatedBy;
                 workspace.UpdatedAt = DateTime.UtcNow;
 

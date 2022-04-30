@@ -34,9 +34,9 @@ namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTest
                 workspace?.Owner.Should().NotBeEmpty();
                 workspace?.Title.Should().NotBeNullOrEmpty();
                 workspace?.Description.Should().NotBeNullOrEmpty();
-                workspace?.AccessType.Should().NotBeNullOrEmpty();
+                workspace?.AccessLevel.Should().NotBeNullOrEmpty();
                 workspace?.Colabs.Should().NotBeNullOrEmpty();
-                workspace?.WorkspaceType.Should().NotBeNullOrEmpty();
+                workspace?.WorkspaceTemplate.Should().NotBeNullOrEmpty();
             }
         }
     }

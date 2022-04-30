@@ -23,12 +23,12 @@ namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTest
                 Owner = "owner-001@email.com",
                 Title = "Workspace - 005",
                 Description = "Workspace - 005",
-                AccessType = "Private",
+                AccessLevel = "Private",
                 Colabs = new List<string>()
                 {
                     "owner-001@email.com"
                 },
-                WorkspaceType = "Basic"
+                WorkspaceTemplate = "Basic"
             };
 
             // Act
@@ -49,9 +49,9 @@ namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTest
             createdWorkspace?.Owner.Should().Be(workspace.Owner);
             createdWorkspace?.Title.Should().Be(workspace.Title);
             createdWorkspace?.Description.Should().Be(workspace.Description);
-            createdWorkspace?.AccessType.Should().Be(workspace.AccessType);
+            createdWorkspace?.AccessLevel.Should().Be(workspace.AccessLevel);
             createdWorkspace?.Colabs.Should().Contain(workspace.Colabs);
-            createdWorkspace?.WorkspaceType.Should().Be(workspace.WorkspaceType);
+            createdWorkspace?.WorkspaceTemplate.Should().Be(workspace.WorkspaceTemplate);
             createdWorkspace?.CreatedBy.Should().Be("owner-001@email.com");
             createdWorkspace?.CreatedAt.Should().BeCloseTo(DateTime.UtcNow, new TimeSpan(0, 0, 59));
             createdWorkspace?.UpdatedBy.Should().Be("owner-001@email.com");

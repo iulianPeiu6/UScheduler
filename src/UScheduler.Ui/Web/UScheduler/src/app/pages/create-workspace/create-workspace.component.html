@@ -21,9 +21,9 @@
         </dxi-item>
       
         <dxi-item
-          dataField="accessType"
+          dataField="accessLevel"
           editorType="dxSelectBox"
-          [editorOptions]="{ dataSource: accessTypes }">
+          [editorOptions]="{ dataSource: accessLevels }">
           <dxi-validation-rule
             type="required"
             message="Access is required">
@@ -31,9 +31,9 @@
         </dxi-item>
 
         <dxi-item
-          dataField="workspaceType"
+          dataField="workspaceTemplate"
           editorType="dxSelectBox"
-          [editorOptions]="{ dataSource: workspaceTypes }">
+          [editorOptions]="{ dataSource: workspaceTemplates }">
           <dxi-validation-rule
             type="required"
             message="Template is required">

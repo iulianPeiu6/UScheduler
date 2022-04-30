@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
-import { environment as env } from 'src/environments/environment';
 import { lastValueFrom } from 'rxjs';
 
 export class Workspace {
@@ -9,9 +8,9 @@ export class Workspace {
     title!: string;
     description!: string;
     owner!: string;
-    accessType!: string;
+    accessLevel!: string;
     colabs!: Array<string>;
-    workspaceType!: string;
+    workspaceTemplate!: string;
     createdAt!: Date;
     createdBy!: string;
     updatedAt!: Date;
@@ -26,18 +25,17 @@ export class WorkspacesService {
     let token$ = this.auth.getAccessTokenSilently();
     let token = await lastValueFrom(token$);
 
+    console.log(token);
+    
     const workspaceToCreate = {
       title: workspace.title,
       description: workspace.description,
-      accessType: workspace.accessType,
-      workspaceType: workspace.workspaceType
+      accessLevel: workspace.accessLevel,
+      workspaceTemplate: workspace.workspaceTemplate
     }
 
-    //ToDo: Fix
-    let createdBy = (await lastValueFrom(this.auth.getUser()))?.email
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'CreatedBy': createdBy!,
       'Authorization': `Bearer ${token}`
     })
 

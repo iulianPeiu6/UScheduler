@@ -3,17 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuardService } from './shared/services';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { TasksComponent } from './pages/tasks/tasks.component';
 import { DxDataGridModule, DxFormModule } from 'devextreme-angular';
 import { CommonModule } from '@angular/common';
-import { CreateWorkspaceComponent } from './shared/components/create-workspace/create-workspace.component';
+import { CreateWorkspaceComponent } from './pages/create-workspace/create-workspace.component';
 
 const routes: Routes = [
-  {
-    path: 'tasks',
-    component: TasksComponent,
-    canActivate: [ AuthGuardService ]
-  },
   {
     path: 'profile',
     component: ProfileComponent,
@@ -47,7 +41,7 @@ const routes: Routes = [
   declarations: [
     HomeComponent,
     ProfileComponent,
-    TasksComponent
+    CreateWorkspaceComponent
   ]
 })
 export class AppRoutingModule { }

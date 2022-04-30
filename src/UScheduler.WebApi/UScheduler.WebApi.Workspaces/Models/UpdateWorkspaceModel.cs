@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace UScheduler.WebApi.Workspaces.Models
+﻿namespace UScheduler.WebApi.Workspaces.Models
 {
     public class UpdateWorkspaceModel
     {
@@ -8,7 +6,7 @@ namespace UScheduler.WebApi.Workspaces.Models
 
         public string Description { get; set; }
 
-        public string AccessType { get; set; }
+        public string AccessLevel { get; set; }
 
         public string UpdatedBy { get; set; }
     }

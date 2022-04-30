@@ -21,7 +21,7 @@ namespace UScheduler.WebApi.Gateway
                             .AddJsonFile("appsettings.json", false, true)
                             .AddJsonFile($"appsettings.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true)
                             .AddJsonFile("ocelot.json", false, true)
-                            .AddJsonFile($"ocelot{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true)
+                            .AddJsonFile($"ocelot.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true)
                             .AddEnvironmentVariables();
                     })
                     .UseStartup<Startup>();
