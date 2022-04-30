@@ -3,9 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuardService } from './shared/services';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { DxDataGridModule, DxFormModule } from 'devextreme-angular';
+import { DxButtonModule, DxDataGridModule, DxFormModule, DxPopupModule, DxSelectBoxModule, DxTextAreaModule, DxToastModule } from 'devextreme-angular';
 import { CommonModule } from '@angular/common';
 import { CreateWorkspaceComponent } from './pages/create-workspace/create-workspace.component';
+import { DxiItemModule } from 'devextreme-angular/ui/nested';
 
 const routes: Routes = [
   {
@@ -34,7 +35,13 @@ const routes: Routes = [
     RouterModule.forRoot(routes, { useHash: true }), 
     DxDataGridModule, 
     DxFormModule,
-    CommonModule
+    DxToastModule,
+    CommonModule,
+    DxiItemModule,
+    DxTextAreaModule,
+    DxPopupModule,
+    DxSelectBoxModule,
+    DxButtonModule,
   ],
   providers: [AuthGuardService],
   exports: [RouterModule],

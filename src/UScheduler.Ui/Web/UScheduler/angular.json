@@ -82,7 +82,7 @@
                 },
                 {
                   "replace": "src/proxy.conf.json",
-                  "with": "src/proxy.conf.prod.ts"
+                  "with": "src/proxy.conf.prod.json"
                 }
               ],
               "outputHashing": "all"

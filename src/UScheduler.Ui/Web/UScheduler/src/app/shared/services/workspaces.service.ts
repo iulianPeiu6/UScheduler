@@ -21,11 +21,9 @@ export class Workspace {
 export class WorkspacesService {
   constructor(private http: HttpClient, private auth: AuthService) {}
 
-  async createWorkspace(workspace: Workspace) {
+  async createWorkspace(workspace: Workspace):Promise<Workspace> {
     let token$ = this.auth.getAccessTokenSilently();
     let token = await lastValueFrom(token$);
-
-    console.log(token);
     
     const workspaceToCreate = {
       title: workspace.title,
@@ -43,5 +41,7 @@ export class WorkspacesService {
     let response = await lastValueFrom(response$);
 
     console.log(response);
+
+    return response;
   }
 }

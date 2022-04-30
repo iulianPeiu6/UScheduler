@@ -20,13 +20,3 @@ export class ProfileComponent {
     };
   }
 }
-
-@NgModule({
-  imports: [
-    BrowserModule,
-    DxFormModule
-  ],
-  declarations: [ ],
-  exports: [ ]
-})
-export class ProfileModule { }
