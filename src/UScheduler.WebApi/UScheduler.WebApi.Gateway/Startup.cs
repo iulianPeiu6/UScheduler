@@ -24,6 +24,8 @@ namespace UScheduler.WebApi.Gateway
         {
             services.AddControllers();
 
+            services.AddEndpointsApiExplorer();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "UScheduler.WebApi.Gateway", Version = "v1" });
@@ -40,6 +42,8 @@ namespace UScheduler.WebApi.Gateway
             });
 
             services.AddOcelot(Configuration);
+
+            services.AddSwaggerForOcelot(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,9 +52,13 @@ namespace UScheduler.WebApi.Gateway
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "UScheduler.WebApi.Gateway v1"));
             }
+
+            app.UseSwagger();
+            app.UseSwaggerForOcelotUI(opt =>
+            {
+                opt.PathToSwaggerGenerator = "/swagger/docs";
+            }).UseOcelot().Wait();
 
             app.UseHttpsRedirection();
 
@@ -59,8 +67,6 @@ namespace UScheduler.WebApi.Gateway
             app.UseAuthentication();
 
             app.UseAuthorization();
-
-            app.UseOcelot().Wait();
 
             app.UseEndpoints(endpoints =>
             {

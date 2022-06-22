@@ -10,6 +10,8 @@ import { AuthModule } from '@auth0/auth0-angular';
 import { environment as env } from 'src/environments/environment';
 import { WorkspacesService } from './shared/services/workspaces.service';
 import { HttpClientModule } from '@angular/common/http';
+import { BoardsService } from './shared/services/boards.service';
+import { TasksService } from './shared/services/tasks.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [
     ScreenService,
     AppInfoService,
-    WorkspacesService
+    WorkspacesService,
+    BoardsService,
+    TasksService
   ],
   bootstrap: [AppComponent]
 })

@@ -28,10 +28,29 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
             this.logger = logger;
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetByIdAsync(Guid id, [FromHeader] string requestedBy)
+        {
+            logger?.LogDebug("Handling GET request on api/v1/Workspaces/{id}", id);
+            var result = await provider.GetWorkspaceByIdAsync(id, requestedBy);
+
+            if (result.Error == ErrorMessage.WorkspaceNotFound)
+            {
+                return NotFound(new { message = result.Error });
+            }
+
+            if (result.IsSuccess)
+            {
+                return Ok(result.Workspace);
+            }
+
+            return StatusCode(StatusCodes.Status500InternalServerError, new { message = result.Error });
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetWorkspacesByOwnerAsync([FromQuery] string owner)
         {
-            logger?.LogDebug($"Handeling GET request on api/v1/Workspaces?owner={owner}");
+            logger?.LogDebug("Handling GET request on api/v1/Workspaces?owner={owner}", owner);
             var result = await provider.GetOwnerWorkspacesAsync(owner);
 
             if (result.IsSuccess)
@@ -43,11 +62,16 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateWorkspaceAsync([FromBody] CreateWorkspaceModel workspace, [FromHeader] string createdBy)
+        public async Task<IActionResult> CreateWorkspaceAsync([FromBody] CreateWorkspaceModel workspace, [FromHeader] string requestedBy)
         {
-            logger?.LogDebug("Handeling POST request on api/v1/Workspaces");
+            logger?.LogDebug("Handling POST request on api/v1/Workspaces");
 
-            workspace.CreatedBy = createdBy;
+            if (string.IsNullOrEmpty(requestedBy))
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = ErrorMessage.RequestedByHeaderValueIsMissing });
+            }
+
+            workspace.CreatedBy = requestedBy;
 
             var result = await provider.CreateWorkspaceAsync(workspace);
 
@@ -60,11 +84,16 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] UpdateWorkspaceModel workspace, [FromHeader] string updatedBy)
+        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] UpdateWorkspaceModel workspace, [FromHeader] string requestedBy)
         {
-            logger?.LogDebug($"Handeling PUT request on api/v1/Workspaces/{id}");
+            logger?.LogDebug("Handling PUT request on api/v1/Workspaces/{id}", id);
 
-            workspace.UpdatedBy = updatedBy;
+            if (string.IsNullOrEmpty(requestedBy))
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = ErrorMessage.RequestedByHeaderValueIsMissing });
+            }
+
+            workspace.UpdatedBy = requestedBy;
 
             var result = await provider.FullUpdateWorkspaceAsync(id, workspace);
 
@@ -82,18 +111,18 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
         }
 
         [HttpPatch("{id}")]
-        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] JsonPatchDocument<Workspace> patchDoc)
+        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] JsonPatchDocument<Workspace> patchDoc, [FromHeader] string requestedBy)
         {
-            logger?.LogDebug($"Handeling PATCH request on api/v1/Workspaces/{id}");
+            logger?.LogDebug("Handling PATCH request on api/v1/Workspaces/{id}", id);
+
+            if (string.IsNullOrEmpty(requestedBy))
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = ErrorMessage.RequestedByHeaderValueIsMissing });
+            }
 
             if (patchDoc != null)
             {
-                Request.Headers.TryGetValue("UpdatedBy", out var updatedBy);
-                if (string.IsNullOrEmpty(updatedBy))
-                {
-                    return StatusCode(StatusCodes.Status500InternalServerError, new { message = ErrorMessage.UpdatedByHeaderValueIsMissing });
-                }
-                var result = await provider.PartiallyUpdateWorkspaceAsync(id, patchDoc, updatedBy);
+                var result = await provider.PartiallyUpdateWorkspaceAsync(id, patchDoc, requestedBy);
 
                 if (result.IsSuccess)
                 {
@@ -112,9 +141,15 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(Guid id)
+        public async Task<IActionResult> DeleteAsync(Guid id, [FromHeader] string requestedBy)
         {
-            logger?.LogDebug($"Handeling DELETE request on api/v1/Workspaces/{id}");
+            logger?.LogDebug("Handling DELETE request on api/v1/Workspaces/{id}", id);
+
+            if (string.IsNullOrEmpty(requestedBy))
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = ErrorMessage.RequestedByHeaderValueIsMissing });
+            }
+
             var result = await provider.DeleteWorkspaceAsync(id);
 
             if (result.IsSuccess)

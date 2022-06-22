@@ -3,10 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuardService } from './shared/services';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { DxButtonModule, DxDataGridModule, DxFormModule, DxPopupModule, DxSelectBoxModule, DxTextAreaModule, DxToastModule } from 'devextreme-angular';
+import { DxButtonModule, DxDataGridModule, DxFormModule, DxPopupModule, DxResponsiveBoxModule, DxSelectBoxModule, DxTextAreaModule, DxTextBoxModule, DxToastModule } from 'devextreme-angular';
 import { CommonModule } from '@angular/common';
 import { CreateWorkspaceComponent } from './pages/create-workspace/create-workspace.component';
 import { DxiItemModule } from 'devextreme-angular/ui/nested';
+import { ViewWorkspaceComponent } from './pages/view-workspace/view-workspace.component';
+import { ListWorkspacesComponent } from './pages/list-workspaces/list-workspaces.component';
+import { ViewBoardComponent } from './pages/view-board/view-board.component';
 
 const routes: Routes = [
   {
@@ -25,6 +28,46 @@ const routes: Routes = [
     canActivate: [ AuthGuardService ]
   },
   {
+    path: 'workspaces/:id/boards',
+    component: ViewWorkspaceComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'workspaces/:workspaceId/boards/:boardId',
+    component: ViewBoardComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'workspaces/all',
+    component: ListWorkspacesComponent,
+    canActivate: [ AuthGuardService ],
+    
+  },
+  {
+    path: 'workspaces/private',
+    component: ListWorkspacesComponent,
+    canActivate: [ AuthGuardService ],
+    
+  },
+  {
+    path: 'workspaces/recent',
+    component: ListWorkspacesComponent,
+    canActivate: [ AuthGuardService ],
+    
+  },
+  {
+    path: 'workspaces/shared',
+    component: ListWorkspacesComponent,
+    canActivate: [ AuthGuardService ],
+    
+  },
+  {
+    path: 'workspaces/favorites',
+    component: ListWorkspacesComponent,
+    canActivate: [ AuthGuardService ],
+    
+  },
+  {
     path: '**',
     redirectTo: '/home'
   }
@@ -32,7 +75,10 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { useHash: true }), 
+    RouterModule.forRoot(routes, { 
+      useHash: true,
+      onSameUrlNavigation: 'reload'
+    }), 
     DxDataGridModule, 
     DxFormModule,
     DxToastModule,
@@ -42,13 +88,18 @@ const routes: Routes = [
     DxPopupModule,
     DxSelectBoxModule,
     DxButtonModule,
+    DxResponsiveBoxModule,
+    DxTextBoxModule
   ],
   providers: [AuthGuardService],
   exports: [RouterModule],
   declarations: [
     HomeComponent,
     ProfileComponent,
-    CreateWorkspaceComponent
+    CreateWorkspaceComponent,
+    ViewWorkspaceComponent,
+    ListWorkspacesComponent,
+    ViewBoardComponent
   ]
 })
 export class AppRoutingModule { }

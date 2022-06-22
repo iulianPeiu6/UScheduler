@@ -27,8 +27,9 @@
         "AllowedScopes": []
       },
       "AddHeadersToRequest": {
-        "CreatedBy": "Claims[https://localhost:5001/email] > value"
-      }
+        "RequestedBy": "Claims[https://localhost:5001/email] > value"
+      },
+      "SwaggerKey": "workspaces"
     },
     {
       "DownstreamPathTemplate": "/api/v1/Workspaces/{id}",
@@ -50,6 +51,7 @@
       },
       "UpstreamPathTemplate": "/api/v1/Workspaces/{id}",
       "UpstreamHttpMethod": [
+        "GET",
         "PUT",
         "PATCH",
         "DELETE"
@@ -57,7 +59,12 @@
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "BaseAuthProvider",
         "AllowedScopes": []
-      }
+      },
+      "AddHeadersToRequest": {
+        "RequestedBy": "Claims[https://localhost:5001/email] > value"
+      },
+      "SwaggerKey": "workspaces",
+      "Priority": 0
     },
     {
       "DownstreamPathTemplate": "/api/v1/Workspaces?owner={owner}",
@@ -84,7 +91,305 @@
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "BaseAuthProvider",
         "AllowedScopes": []
-      }
+      },
+      "AddHeadersToRequest": {
+        "RequestedBy": "Claims[https://localhost:5001/email] > value"
+      },
+      "SwaggerKey": "workspaces"
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Boards?workspaceId={workspaceId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44313"
+        }
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [
+
+        ],
+        "EnableRateLimiting": false,
+        "Period": "5s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
+      "UpstreamPathTemplate": "/api/v1/Workspaces/{workspaceId}/Boards",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "BaseAuthProvider",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "RequestedBy": "Claims[https://localhost:5001/email] > value"
+      },
+      "SwaggerKey": "boards",
+      "Priority": 1
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Boards",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44313"
+        }
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [
+
+        ],
+        "EnableRateLimiting": false,
+        "Period": "5s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
+      "UpstreamPathTemplate": "/api/v1/Workspaces/{workspaceId}/Boards",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "BaseAuthProvider",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "CreatedBy": "Claims[https://localhost:5001/email] > value"
+      },
+      "SwaggerKey": "boards",
+      "Priority": 1
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Boards/{boardId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44313"
+        }
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [
+
+        ],
+        "EnableRateLimiting": false,
+        "Period": "5s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
+      "UpstreamPathTemplate": "/api/v1/Workspaces/{workspaceId}/Boards/{boardId}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "BaseAuthProvider",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "RequestedBy": "Claims[https://localhost:5001/email] > value"
+      },
+      "SwaggerKey": "boards",
+      "Priority": 1
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Tasks",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44364"
+        }
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [
+
+        ],
+        "EnableRateLimiting": false,
+        "Period": "5s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
+      "UpstreamPathTemplate": "/api/v1/Workspaces/{workspaceId}/Boards/{boardId}/Tasks",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "BaseAuthProvider",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "RequestedBy": "Claims[https://localhost:5001/email] > value"
+      },
+      "SwaggerKey": "tasks",
+      "Priority": 1
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Tasks?boardId={boardId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44364"
+        }
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [
+
+        ],
+        "EnableRateLimiting": false,
+        "Period": "5s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
+      "UpstreamPathTemplate": "/api/v1/Workspaces/{workspaceId}/Boards/{boardId}/Tasks",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "BaseAuthProvider",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "RequestedBy": "Claims[https://localhost:5001/email] > value"
+      },
+      "SwaggerKey": "tasks",
+      "Priority": 2
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Tasks/{taskId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44364"
+        }
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [
+
+        ],
+        "EnableRateLimiting": false,
+        "Period": "5s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
+      "UpstreamPathTemplate": "/api/v1/Workspaces/{workspaceId}/Boards/{boardId}/Tasks/{taskId}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "DELETE",
+        "PUT",
+        "PATCH"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "BaseAuthProvider",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "RequestedBy": "Claims[https://localhost:5001/email] > value"
+      },
+      "SwaggerKey": "tasks",
+      "Priority": 1
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/ToDos?taskId={taskId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44364"
+        }
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [
+
+        ],
+        "EnableRateLimiting": false,
+        "Period": "5s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
+      "UpstreamPathTemplate": "/api/v1/Workspaces/{workspaceId}/Boards/{boardId}/Tasks/{taskId}/ToDos",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "BaseAuthProvider",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "RequestedBy": "Claims[https://localhost:5001/email] > value"
+      },
+      "SwaggerKey": "tasks",
+      "Priority": 1
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/ToDos",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44364"
+        }
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [
+
+        ],
+        "EnableRateLimiting": false,
+        "Period": "5s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
+      "UpstreamPathTemplate": "/api/v1/Workspaces/{workspaceId}/Boards/{boardId}/Tasks/{taskId}/ToDos",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "BaseAuthProvider",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "RequestedBy": "Claims[https://localhost:5001/email] > value"
+      },
+      "SwaggerKey": "tasks",
+      "Priority": 1
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "workspaces",
+      "Config": [
+        {
+          "Name": "UScheduler.WebApi.Workspaces",
+          "Version": "v1",
+          "Url": "https://localhost:7114/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "boards",
+      "Config": [
+        {
+          "Name": "UScheduler.WebApi.Boards",
+          "Version": "v1",
+          "Url": "https://localhost:44313/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "tasks",
+      "Config": [
+        {
+          "Name": "UScheduler.WebApi.Tasks",
+          "Version": "v1",
+          "Url": "https://localhost:44364/swagger/v1/swagger.json"
+        }
+      ]
     }
   ]
 }

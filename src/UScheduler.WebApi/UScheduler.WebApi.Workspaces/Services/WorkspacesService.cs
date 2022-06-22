@@ -30,6 +30,30 @@ namespace UScheduler.WebApi.Workspaces.Services
             this.mapper = mapper;
         }
 
+        public async Task<(bool IsSuccess, WorkspaceDto Workspace, string Error)> GetWorkspaceByIdAsync(Guid id, string requestedBy)
+        {
+            try
+            {
+                var workspace = await context.Workspaces
+                    .SingleOrDefaultAsync(w => w.Id == id);
+
+                if (workspace is null)
+                {
+                    return (false, null, ErrorMessage.WorkspaceNotFound);
+                }
+
+                // TODO: authorization on private workspaces
+
+                var result = mapper.Map<WorkspaceDto>(workspace);
+                return (true, result, null);
+            }
+            catch (Exception ex)
+            {
+                logger?.LogError("{ex}", ex);
+                return (false, null, ex.Message);
+            }
+        }
+
         public async Task<(bool IsSuccess, WorkspaceDto Workspace, string Error)> CreateWorkspaceAsync(CreateWorkspaceModel createWorkspaceModel)
         {
             try
@@ -55,7 +79,7 @@ namespace UScheduler.WebApi.Workspaces.Services
             }
             catch (Exception ex)
             {
-                logger?.LogError(ex.ToString());
+                logger?.LogError("{ex}", ex);
                 return (false, null, ex.Message);
             }
         }
@@ -73,7 +97,7 @@ namespace UScheduler.WebApi.Workspaces.Services
             }
             catch (Exception ex)
             {
-                logger?.LogError(ex.ToString());
+                logger?.LogError("{ex}", ex);
                 return (false, null, ex.Message);
             }
         }
@@ -104,7 +128,7 @@ namespace UScheduler.WebApi.Workspaces.Services
             }
             catch (Exception ex)
             {
-                logger?.LogError(ex.ToString());
+                logger?.LogError("{ex}", ex);
                 return (false, null, ex.Message);
             }
         }
@@ -133,7 +157,7 @@ namespace UScheduler.WebApi.Workspaces.Services
             }
             catch (Exception ex)
             {
-                logger?.LogError(ex.ToString());
+                logger?.LogError("{ex}", ex);
                 return (false, null, ex.Message);
             }
         }
@@ -157,7 +181,7 @@ namespace UScheduler.WebApi.Workspaces.Services
             }
             catch (Exception ex)
             {
-                logger?.LogError(ex.ToString());
+                logger?.LogError("{ex}", ex);
                 return (false, ex.Message);
             }
         }
