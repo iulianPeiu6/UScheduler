@@ -42,8 +42,6 @@ namespace UScheduler.WebApi.Workspaces.Services
                     return (false, null, ErrorMessage.WorkspaceNotFound);
                 }
 
-                // TODO: authorization on private workspaces
-
                 var result = mapper.Map<WorkspaceDto>(workspace);
                 return (true, result, null);
             }

@@ -23,7 +23,7 @@ namespace UScheduler.WebApi.Boards.IntegrationTests.BoardsControllerTests
                 new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
             board.Should().NotBeNull();
-            board.Title.Should().Be("Board - 001");
+            board?.Title.Should().Be("Board - 001");
         }
 
         [Test]

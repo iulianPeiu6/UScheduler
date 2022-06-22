@@ -23,11 +23,11 @@ namespace UScheduler.WebApi.Tasks.IntegrationTests.ToDosControllerTests
                 new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
             todo.Should().NotBeNull();
-            todo.Description.Should().Be("ToDo description - 001");
-            todo.CreatedBy = "owner-001@email.com";
-            todo.UpdatedBy = "owner-001@email.com";
-            todo.CreatedAt = currentDateTime;
-            todo.UpdatedAt = currentDateTime;
+            todo!.Description.Should().Be("ToDo description - 001");
+            todo!.CreatedBy.Should().Be("owner-001@email.com");
+            todo!.UpdatedBy.Should().Be("owner-001@email.com");
+            todo!.CreatedAt = currentDateTime;
+            todo!.UpdatedAt = currentDateTime;
         }
 
         [Test]

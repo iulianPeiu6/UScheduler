@@ -16,7 +16,6 @@ namespace UScheduler.WebApi.Tasks.IntegrationTests.ToDosControllerTests
         [Test]
         public async Task Given_ValidToDo_When_PutUpdateToDoIsCalled_Then_ReturnOkWithToDo()
         {
-            var newDueDate = DateTime.UtcNow.AddDays(7);
             var todo = new UpdateToDoModel()
             {
                 Description = "ToDo description - 001 - Updated",

@@ -15,7 +15,7 @@ namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTest
         [Test]
         public async Task Given_OwnerId_When_GetAllOwnerWorkspacesIsCalled_Then_ReturnOwnerWorkspacesAsync()
         {
-            // Arange
+            // Arrange
             var ownerId = Guid.Parse("e27387c0-d043-4a74-861c-f9a274774974");
 
             // Act
@@ -25,10 +25,10 @@ namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTest
                 responseContent,
                 new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
-            // Asert
+            // Assert
             response.StatusCode.Should().Be(HttpStatusCode.OK);
             ownerWorkspaces.Should().NotBeNull();
-            foreach (var workspace in ownerWorkspaces)
+            foreach (var workspace in ownerWorkspaces!)
             {
                 workspace?.Id.Should().NotBeEmpty();
                 workspace?.Owner.Should().NotBeEmpty();
