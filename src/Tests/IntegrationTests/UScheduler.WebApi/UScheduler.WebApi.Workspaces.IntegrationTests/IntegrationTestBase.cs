@@ -9,7 +9,7 @@ using UScheduler.WebApi.Workspaces;
 using UScheduler.WebApi.Workspaces.Data;
 using UScheduler.WebApi.Workspaces.Data.Entities;
 
-namespace UScheduler.WebApi.Users.IntegrationTests
+namespace UScheduler.WebApi.Workspaces.IntegrationTests
 {
     public class IntegrationTestBase
     {

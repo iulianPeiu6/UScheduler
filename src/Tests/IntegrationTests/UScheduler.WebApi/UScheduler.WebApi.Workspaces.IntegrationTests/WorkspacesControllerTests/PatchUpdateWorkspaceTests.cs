@@ -8,7 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using UScheduler.WebApi.Users.IntegrationTests;
+using UScheduler.WebApi.Workspaces.IntegrationTests;
 using UScheduler.WebApi.Workspaces.Data.Entities;
 using UScheduler.WebApi.Workspaces.Models;
 

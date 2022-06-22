@@ -4,7 +4,7 @@ using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using UScheduler.WebApi.Users.IntegrationTests;
+using UScheduler.WebApi.Workspaces.IntegrationTests;
 
 namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTests
 {
