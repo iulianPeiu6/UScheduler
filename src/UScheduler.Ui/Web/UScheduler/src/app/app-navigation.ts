@@ -1,7 +1,7 @@
 export const navigation = [
   {
     text: 'Home',
-    path: '/home',
+    path: '/workspaces/all',
     icon: 'home'
   },
   {
