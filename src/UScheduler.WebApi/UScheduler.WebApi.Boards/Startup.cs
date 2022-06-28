@@ -69,10 +69,10 @@ namespace UScheduler.WebApi.Boards
                 endpoints.MapControllers();
             });
 
-            if (env.IsProduction())
-            {
-                InitializeDatabase(app);
-            }
+            //if (env.IsProduction())
+            //{
+            //    InitializeDatabase(app);
+            //}
         }
 
         private static void InitializeDatabase(IApplicationBuilder app)
